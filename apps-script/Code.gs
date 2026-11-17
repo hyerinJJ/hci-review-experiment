@@ -14,6 +14,7 @@
  * - raw: 과제가 끝날 때 받은 전체 데이터(JSON) 백업
  */
 
+const SHEET_ID = '';   // 시트에 붙은 스크립트가 아니면 기록할 시트 ID를 넣는다
 const ADMIN_KEY = 'CHANGE_ME';   // 관리자 화면에서 기록을 불러올 때 쓰는 키
 const SESSION_HEAD = ['sid', 'pid', 'slot', 'product', 'condition', 'status', 'started_at', 'updated_at', 'device', 'screen',
   'choice', 'decision_time_s', 'reviews_expanded', 'reviews_viewed_1s', 'review_page_visits',
@@ -45,7 +46,7 @@ function doPost(e) {
 function doGet(e) {
   const p = e.parameter || {};
   if (p.action === 'ping') {
-    return out_({ ok: true, sheet: SpreadsheetApp.getActiveSpreadsheet().getUrl(), name: SpreadsheetApp.getActiveSpreadsheet().getName() });
+    return out_({ ok: true, sheet: ss_().getUrl(), name: ss_().getName() });
   }
   if (p.key !== ADMIN_KEY) return out_({ ok: false, error: '관리자 키가 맞지 않습니다.' });
   if (p.action === 'sessions') return out_({ ok: true, rows: readSheet_('sessions') });
@@ -64,11 +65,12 @@ function doGet(e) {
 }
 
 /* ---------- 내부 ---------- */
+function ss_() { return SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet(); }
 function out_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 function sheet_(name, head) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = ss_();
   let sh = ss.getSheetByName(name);
   if (!sh) {
     sh = ss.insertSheet(name);
@@ -117,7 +119,7 @@ function appendRaw_(d) {
   sh.appendRow([new Date(), d.sid, d.pid, JSON.stringify(d).slice(0, 49000)]);
 }
 function readSheet_(name) {
-  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name);
+  const sh = ss_().getSheetByName(name);
   if (!sh || sh.getLastRow() < 2) return [];
   const v = sh.getDataRange().getValues(), head = v.shift();
   return v.map(function (row) {
