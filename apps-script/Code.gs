@@ -45,6 +45,7 @@ function doPost(e) {
 
 function doGet(e) {
   const p = e.parameter || {};
+  p.sid = p.s || p.sid;   // 'sid'는 구글 주소에서 쓰는 이름이라 's'로 받음
   CB_ = /^[A-Za-z_$][\w$]*$/.test(p.callback || '') ? p.callback : '';
   if (p.action === 'ping') {
     return out_({ ok: true, sheet: ss_().getUrl(), name: ss_().getName() });
