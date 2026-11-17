@@ -64,7 +64,10 @@
   /* 세션 시작 */
   LAB.start = function (info) {
     LAB.ctx = info;
-    LAB.sid = info.pid + '_' + info.product + '_' + info.condition + '_' + Date.now().toString(36);
+    var pk = Object.keys(LAB.PRODUCTS).filter(function (k) { return LAB.PRODUCTS[k].name === info.product; })[0] || 'x';
+    var ck = Object.keys(LAB.CONDS).filter(function (k) { return LAB.CONDS[k] === info.condition; })[0] || 'x';
+    var pa = String(info.pid).replace(/[^A-Za-z0-9]/g, '') || 'P';
+    LAB.sid = pa + '_' + pk + '_' + ck + '_' + Date.now().toString(36);   // 영문만 사용 (시트 조회 주소에 그대로 쓰기 위해)
     LAB._buf = [];
     var o = base();
     o.kind = 'start';
