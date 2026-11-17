@@ -45,6 +45,7 @@ function doPost(e) {
 
 function doGet(e) {
   const p = e.parameter || {};
+  CB_ = /^[A-Za-z_$][\w$]*$/.test(p.callback || '') ? p.callback : '';
   if (p.action === 'ping') {
     return out_({ ok: true, sheet: ss_().getUrl(), name: ss_().getName() });
   }
@@ -66,7 +67,9 @@ function doGet(e) {
 
 /* ---------- 내부 ---------- */
 function ss_() { return SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet(); }
+let CB_ = '';
 function out_(o) {
+  if (CB_) return ContentService.createTextOutput(CB_ + '(' + JSON.stringify(o) + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 function sheet_(name, head) {

@@ -39,6 +39,24 @@
   }
   LAB.post = post;
 
+  /* 시트에서 읽기 (JSONP: Apps Script는 다른 주소에서 fetch로 읽을 수 없어서 script 태그로 받음) */
+  var jpn = 0;
+  LAB.get = function (q) {
+    var url = LAB.gasUrl();
+    if (!url) return Promise.reject(new Error('저장 주소가 없어요'));
+    return new Promise(function (res, rej) {
+      var cb = '__lab' + Date.now().toString(36) + (jpn++);
+      var s = document.createElement('script'), t;
+      function end() { clearTimeout(t); delete window[cb]; s.remove(); }
+      window[cb] = function (d) { end(); res(d); };
+      s.onerror = function () { end(); rej(new Error('시트에 연결하지 못했어요')); };
+      t = setTimeout(function () { end(); rej(new Error('응답 시간이 초과됐어요')); }, 30000);
+      var p = new URLSearchParams(q || {}); p.set('callback', cb);
+      s.src = url + '?' + p.toString();
+      document.head.appendChild(s);
+    });
+  };
+
   function base() {
     return { sid: LAB.sid, pid: LAB.ctx.pid, product: LAB.ctx.product, condition: LAB.ctx.condition, slot: LAB.slot };
   }

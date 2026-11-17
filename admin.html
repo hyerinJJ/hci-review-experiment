@@ -119,13 +119,17 @@ let SESS=[],sel='';
 const key=()=>LS.get('lab_admin_key')||'';
 $('#gas').value=LAB.gasUrl();$('#key').value=key();
 const nameOf=k=>P[k]?P[k].name:k;
-function api(q){const u=LAB.gasUrl();if(!u)return Promise.reject(new Error('저장 주소가 없어요'));return fetch(u+'?'+new URLSearchParams(Object.assign({key:key()},q))).then(r=>r.json())}
+let EVC=null;
+function api(q){
+  if(q.action==='events'){const sid=q.sid;const p=EVC&&!q.fresh?Promise.resolve(EVC):LAB.get({action:'events',key:key()}).then(j=>{if(!j.ok)throw new Error(j.error);EVC=j;return j});return p.then(j=>({ok:true,rows:sid?j.rows.filter(r=>r.sid===sid):j.rows}))}
+  return LAB.get(Object.assign({key:key()},q));
+}
 function badge(s){const c=s==='완료'?'ok':s==='제외'?'x':s?'wa':'';return `<span class="badge ${c}">${s||'미진행'}</span>`}
 function fmt(t){if(!t)return '';const d=new Date(t);return isNaN(d)?t:`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
 function load(){
   if(!LAB.gasUrl()){$('#upd').textContent='저장 주소를 먼저 설정해 주세요';renderAll();return}
   $('#upd').textContent='불러오는 중';
-  api({action:'sessions'}).then(j=>{if(!j.ok)throw new Error(j.error);SESS=j.rows;$('#upd').textContent='마지막 갱신 '+fmt(new Date());renderAll()}).catch(e=>{$('#upd').textContent='불러오기 실패: '+e.message;renderAll()});
+  EVC=null;api({action:'sessions'}).then(j=>{if(!j.ok)throw new Error(j.error);SESS=j.rows;$('#upd').textContent='마지막 갱신 '+fmt(new Date());renderAll()}).catch(e=>{$('#upd').textContent='불러오기 실패: '+e.message;renderAll()});
 }
 function visible(){const fp=$('#fp').value,fc=$('#fc').value,fs=$('#fs').value;return SESS.filter(r=>(!fp||r.pid===fp)&&(!fc||r.condition===fc)&&(fs==='all'||r.status!=='제외')).sort((a,b)=>String(b.updated_at).localeCompare(String(a.updated_at)))}
 function renderAll(){
@@ -173,18 +177,18 @@ document.addEventListener('click',e=>{
   else if(t.dataset.sid)showEvents(t.dataset.sid);
   else if(t.id==='refresh')load();
   else if(t.id==='dls')csv(visible(),'sessions.csv');
-  else if(t.id==='dle')api({action:'events'}).then(j=>csv((j.rows||[]).filter(r=>{const s=SESS.find(x=>x.sid===r.sid);return !s||s.status!=='제외'}),'events.csv')).catch(err=>alert(err.message));
+  else if(t.id==='dle')api({action:'events',fresh:1}).then(j=>csv((j.rows||[]).filter(r=>{const s=SESS.find(x=>x.sid===r.sid);return !s||s.status!=='제외'}),'events.csv')).catch(err=>alert(err.message));
   else if(t.id==='save'){
     const u=$('#gas').value.trim(),k=$('#key').value.trim(),m=$('#smsg');
     if(u)LS.set('lab_gas_url',u);else LS.del('lab_gas_url');
     LS.set('lab_admin_key',k);
     if(!LAB.gasUrl()){m.className='msg err';m.textContent='주소를 넣어 주세요';return}
     m.className='msg';m.textContent='연결 확인 중';
-    fetch(LAB.gasUrl()+'?action=ping').then(r=>r.json()).then(j=>{if(!j.ok)throw 0;m.className='msg ok';m.textContent=`연결됨: ${j.name}`;const a=$('#sheet');a.href=j.sheet;a.hidden=false;load()}).catch(()=>{m.className='msg err';m.textContent='연결하지 못했어요. 주소와 배포 권한(모든 사용자)을 확인해 주세요.'});
+    LAB.get({action:'ping'}).then(j=>{if(!j.ok)throw 0;m.className='msg ok';m.textContent=`연결됨: ${j.name}`;const a=$('#sheet');a.href=j.sheet;a.hidden=false;load()}).catch(()=>{m.className='msg err';m.textContent='연결하지 못했어요. 주소와 배포 권한(모든 사용자)을 확인해 주세요.'});
   }
 });
 ['#fp','#fc','#fs'].forEach(s=>$(s).addEventListener('change',renderAll));
-if(LAB.gasUrl())fetch(LAB.gasUrl()+'?action=ping').then(r=>r.json()).then(j=>{if(j.ok){const a=$('#sheet');a.href=j.sheet;a.hidden=false}}).catch(()=>{});
+if(LAB.gasUrl())LAB.get({action:'ping'}).then(j=>{if(j.ok){const a=$('#sheet');a.href=j.sheet;a.hidden=false}}).catch(()=>{});
 load();setInterval(()=>{if(document.visibilityState==='visible'&&LAB.gasUrl())load()},30000);
 </script>
 </body>
