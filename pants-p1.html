@@ -260,22 +260,27 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 /* ===== P2: AI 킬러 필터 ===== */
 .n{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .n .exb{margin-left:0}
-.tmp{display:inline-flex;align-items:center;gap:3px;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:800;letter-spacing:0}
-.tmp i{font-style:normal;font-weight:600;font-size:11px;opacity:.85}
-.tmp.t3{background:#e5f6ea;color:#14793a}.tmp.t2{background:#e8f1ff;color:#2358c4}.tmp.t1{background:#fff1de;color:#b25a00}
-.aip2{display:inline-flex;align-items:center;gap:3px;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:700}
-.aip2.ai-f{background:#111;color:#fff}.aip2.ai-p{background:#e9eefe;color:#3f5fd8}
-.aip2.ai-n{position:relative;overflow:hidden;color:#5a3a00;background:linear-gradient(110deg,#fff4c2 0%,#ffe48a 35%,#fff9dc 50%,#ffe48a 65%,#fff4c2 100%);background-size:220% 100%;animation:shine 2.6s linear infinite;box-shadow:0 0 0 1px #f2cf5c inset,0 0 8px rgba(255,200,40,.55)}
-.aip2.ai-n .tw{display:inline-block;animation:twk 1.6s ease-in-out infinite}
-@keyframes shine{0%{background-position:120% 0}100%{background-position:-120% 0}}
-@keyframes twk{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.35) rotate(18deg);opacity:.7}}
-@media (prefers-reduced-motion:reduce){.aip2.ai-n,.aip2.ai-n .tw{animation:none}}
-.who .sd{flex-wrap:wrap}
-.aibar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 16px 0;padding:12px 14px;border:1px solid #e3d9f7;border-radius:12px;background:#faf7ff}
-.aibar b{display:block;font-size:15px}.aibar small{display:block;margin-top:2px;font-size:13px;color:#667}
-.sw{flex:none;position:relative;width:48px;height:28px;border-radius:14px;background:#c8ced6;transition:background .15s}
-.sw i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .15s}
-.sw.on{background:#6a35cf}.sw.on i{left:23px}
+.gr{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 9px;border-radius:11px;font-size:12px;font-weight:800;letter-spacing:0;white-space:nowrap}
+.gr i{font-style:normal;font-weight:600;font-size:11px}
+.gr.g1{background:linear-gradient(110deg,#f9dc5c,#e0a90f 55%,#f9dc5c);color:#4a3200;box-shadow:0 0 0 1px #d4a017 inset}
+.gr.g2{position:relative;background:linear-gradient(110deg,#a9b8d4 0%,#eef3ff 38%,#8fa5cf 55%,#eef3ff 72%,#a9b8d4 100%);background-size:220% 100%;animation:shine2 2.2s linear infinite;color:#17233d;box-shadow:0 0 0 1px #7f93bd inset,0 0 9px rgba(100,135,225,.65)}
+.gr.g2::before{content:"✦";display:inline-block;font-size:11px;color:#3b63d6;animation:twk2 1.5s ease-in-out infinite}
+@keyframes shine2{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@keyframes twk2{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.4) rotate(20deg);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.gr.g2,.gr.g2::before{animation:none}}
+.expsort{padding:6px 16px 0}
+.expsort button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:12px 14px;border:1.5px solid #d6d9dc;border-radius:12px;background:#fff}
+.expsort b{display:block;font-size:15px}.expsort small{display:block;margin-top:2px;font-size:12.5px;color:#667}
+.expsort .xb{display:flex;gap:4px;flex:none}
+.expsort .xb .gr{padding:0;width:22px;justify-content:center}
+.expsort .xb .gr.g2::before{display:none}
+.expsort button.on{border-color:#2f6bff;background:#f0f5ff}
+.expsort button.on b::after{content:" ✓";color:#2f6bff}
+.gr.g3{background:#2f6bff;color:#fff}
+.gr.g4{background:#ffe14d;color:#5a4700}
+.gr.g5{background:#e1e4e8;color:#6b727c}
+.glg{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.glg .gr{opacity:.45}.glg .gr.me{opacity:1;outline:2px solid #111;outline-offset:1px}
 .chiphd{display:flex;align-items:center;gap:6px;padding:14px 16px 0;font-size:15px;font-weight:800}
 .chiphd small{font-weight:400;color:#667;font-size:13px}
 .pcn{margin:0 0 10px;font-size:14px;color:#555;line-height:1.5}
@@ -307,15 +312,11 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 .fsel select{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer}
 .fsel:has(select:focus-visible){outline:3px solid var(--pri);outline-offset:2px}
 .fc.ic.on::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--pri)}
-/* AI 킬러 */
-.fz .aibar,#v-product .aibar{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e7e0f8;border-radius:12px;background:var(--ai-bg,#f5f1ff)}
-.fz .aibar{margin:12px 0 0}
-#v-product .aibar{margin:12px 16px 0}
-.aibar .aic{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#fff;color:#6a35cf;font-size:12px;font-weight:800;box-shadow:inset 0 0 0 1px #e1d7f7}
-.aibar>div{flex:1;min-width:0}
-.aibar b{display:block;font-size:14.5px;line-height:1.3}
-.aibar small{display:block;margin-top:2px;font-size:12.5px;color:#6b6f80}
-.aibar .sw.on{background:#6a35cf}
+/* 경험 리뷰어 등급순 */
+.fz .expsort{padding:0;margin-top:12px}
+.fz .expsort button{padding:10px 12px;border:1px solid var(--fz-ln);border-radius:12px}
+.fz .expsort b{font-size:14.5px}.fz .expsort small{font-size:12.5px}
+.fz .expsort button.on{border-color:var(--pri);background:var(--pri-bg)}
 /* AI 맞춤 선택칩 */
 .fz-ai{margin-top:14px;padding-top:12px;border-top:1px dashed #e4e6ea}
 .fz .chiphd{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;padding:0;font-size:14.5px;font-weight:800}
@@ -336,8 +337,8 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 </style>
 <script>window.IMGS={"product_main":"assets/pants/product_main.jpg","logo":"assets/pants/logo.jpg","opt_1":"assets/pants/opt_1.jpg","opt_2":"assets/pants/opt_2.jpg","opt_3":"assets/pants/opt_3.jpg","opt_4":"assets/pants/opt_4.jpg","rv_t1":"assets/pants/rv_t1.jpg","rv_t2":"assets/pants/rv_t2.jpg","rv_t3":"assets/pants/rv_t3.jpg","rv_t4":"assets/pants/rv_t4.jpg","rv_t5":"assets/pants/rv_t5.jpg","rv_t6":"assets/pants/rv_t6.jpg","rv_t7":"assets/pants/rv_t7.jpg","rv_t8":"assets/pants/rv_t8.jpg","rv_p1":"assets/pants/rv_p1.jpg","rv_p2":"assets/pants/rv_p2.jpg","rv_p3":"assets/pants/rv_p3.jpg","rv_p4":"assets/pants/rv_p4.jpg","rv_p5":"assets/pants/rv_p5.jpg","detail_01":"assets/pants/detail_01.jpg","detail_02":"assets/pants/detail_02.jpg","detail_03":"assets/pants/detail_03.jpg","detail_04":"assets/pants/detail_04.jpg","detail_05":"assets/pants/detail_05.jpg","detail_06":"assets/pants/detail_06.jpg","detail_07":"assets/pants/detail_07.jpg","detail_08":"assets/pants/detail_08.jpg","detail_09":"assets/pants/detail_09.jpg","detail_10":"assets/pants/detail_10.jpg","detail_11":"assets/pants/detail_11.jpg","detail_12":"assets/pants/detail_12.jpg","detail_13":"assets/pants/detail_13.jpg","detail_14":"assets/pants/detail_14.jpg","detail_15":"assets/pants/detail_15.jpg","detail_16":"assets/pants/detail_16.jpg","detail_17":"assets/pants/detail_17.jpg","detail_18":"assets/pants/detail_18.jpg","detail_19":"assets/pants/detail_19.jpg","detail_20":"assets/pants/detail_20.jpg","detail_21":"assets/pants/detail_21.jpg","detail_22":"assets/pants/detail_22.jpg","detail_23":"assets/pants/detail_23.jpg","detail_24":"assets/pants/detail_24.jpg","detail_25":"assets/pants/detail_25.jpg","detail_26":"assets/pants/detail_26.jpg","rv_x54_6":"assets/pants/rv_x54_6.jpg","rv_x50_4":"assets/pants/rv_x50_4.jpg","rv_x49_9":"assets/pants/rv_x49_9.jpg","rv_x29_2":"assets/pants/rv_x29_2.jpg","rv_x43_3":"assets/pants/rv_x43_3.jpg","rv_x62_7":"assets/pants/rv_x62_7.jpg","rv_x48_2":"assets/pants/rv_x48_2.jpg","rv_x40_6":"assets/pants/rv_x40_6.jpg","rv_x24_10":"assets/pants/rv_x24_10.jpg","rv_x57_7":"assets/pants/rv_x57_7.jpg","rv_x52_3":"assets/pants/rv_x52_3.jpg","rv_x53_2":"assets/pants/rv_x53_2.jpg","rv_x8_4":"assets/pants/rv_x8_4.jpg","rv_x24_1":"assets/pants/rv_x24_1.jpg","rv_x18_1":"assets/pants/rv_x18_1.jpg","rv_x36_4":"assets/pants/rv_x36_4.jpg","rv_x47_5":"assets/pants/rv_x47_5.jpg","rv_x8_1":"assets/pants/rv_x8_1.jpg","rv_x48_1":"assets/pants/rv_x48_1.jpg","rv_x27_8":"assets/pants/rv_x27_8.jpg","rv_x58_9":"assets/pants/rv_x58_9.jpg","rv_x50_5":"assets/pants/rv_x50_5.jpg","rv_x51_4":"assets/pants/rv_x51_4.jpg","rv_x24_5":"assets/pants/rv_x24_5.jpg","rv_x41_9":"assets/pants/rv_x41_9.jpg","rv_x16_8":"assets/pants/rv_x16_8.jpg","rv_x36_1":"assets/pants/rv_x36_1.jpg","rv_x41_7":"assets/pants/rv_x41_7.jpg","rv_x22_2":"assets/pants/rv_x22_2.jpg","rv_x52_8":"assets/pants/rv_x52_8.jpg","rv_x43_1":"assets/pants/rv_x43_1.jpg","rv_x48_5":"assets/pants/rv_x48_5.jpg","rv_x8_3":"assets/pants/rv_x8_3.jpg","rv_x39_10":"assets/pants/rv_x39_10.jpg","rv_x2_3":"assets/pants/rv_x2_3.jpg","rv_x37_2":"assets/pants/rv_x37_2.jpg","rv_x30_1":"assets/pants/rv_x30_1.jpg","rv_x38_5":"assets/pants/rv_x38_5.jpg","rv_x56_5":"assets/pants/rv_x56_5.jpg","rv_x48_10":"assets/pants/rv_x48_10.jpg","rv_x41_5":"assets/pants/rv_x41_5.jpg","rv_x45_1":"assets/pants/rv_x45_1.jpg","rv_x26_2":"assets/pants/rv_x26_2.jpg","rv_x29_3":"assets/pants/rv_x29_3.jpg","rv_x44_5":"assets/pants/rv_x44_5.jpg","rv_x42_2":"assets/pants/rv_x42_2.jpg","rv_x24_6":"assets/pants/rv_x24_6.jpg","rv_x47_3":"assets/pants/rv_x47_3.jpg","rv_x53_1":"assets/pants/rv_x53_1.jpg","rv_x41_6":"assets/pants/rv_x41_6.jpg","rv_x56_4":"assets/pants/rv_x56_4.jpg","rv_x61_5":"assets/pants/rv_x61_5.jpg","rv_x31_1":"assets/pants/rv_x31_1.jpg","rv_x26_5":"assets/pants/rv_x26_5.jpg","rv_x27_1":"assets/pants/rv_x27_1.jpg","rv_x26_3":"assets/pants/rv_x26_3.jpg","rv_x40_7":"assets/pants/rv_x40_7.jpg","rv_x59_1":"assets/pants/rv_x59_1.jpg","rv_x34_4":"assets/pants/rv_x34_4.jpg","rv_x51_1":"assets/pants/rv_x51_1.jpg","rv_x57_5":"assets/pants/rv_x57_5.jpg","rv_x58_3":"assets/pants/rv_x58_3.jpg","rv_x24_2":"assets/pants/rv_x24_2.jpg","rv_x38_8":"assets/pants/rv_x38_8.jpg","rv_x52_5":"assets/pants/rv_x52_5.jpg","rv_x16_10":"assets/pants/rv_x16_10.jpg","rv_x56_1":"assets/pants/rv_x56_1.jpg","rv_x27_3":"assets/pants/rv_x27_3.jpg","rv_x57_4":"assets/pants/rv_x57_4.jpg","rv_x23_2":"assets/pants/rv_x23_2.jpg","rv_x61_6":"assets/pants/rv_x61_6.jpg","rv_x39_3":"assets/pants/rv_x39_3.jpg","rv_x55_5":"assets/pants/rv_x55_5.jpg","rv_x60_3":"assets/pants/rv_x60_3.jpg","rv_x24_7":"assets/pants/rv_x24_7.jpg","rv_x25_6":"assets/pants/rv_x25_6.jpg","rv_x46_3":"assets/pants/rv_x46_3.jpg","rv_x59_4":"assets/pants/rv_x59_4.jpg","rv_x25_9":"assets/pants/rv_x25_9.jpg","rv_x31_2":"assets/pants/rv_x31_2.jpg","rv_x24_4":"assets/pants/rv_x24_4.jpg","rv_x25_5":"assets/pants/rv_x25_5.jpg","rv_x44_1":"assets/pants/rv_x44_1.jpg","rv_x2_2":"assets/pants/rv_x2_2.jpg","rv_x44_3":"assets/pants/rv_x44_3.jpg","rv_x16_2":"assets/pants/rv_x16_2.jpg","rv_x16_9":"assets/pants/rv_x16_9.jpg","rv_x50_6":"assets/pants/rv_x50_6.jpg","rv_x51_2":"assets/pants/rv_x51_2.jpg","rv_x58_5":"assets/pants/rv_x58_5.jpg","rv_x59_10":"assets/pants/rv_x59_10.jpg","rv_x30_2":"assets/pants/rv_x30_2.jpg","rv_x45_3":"assets/pants/rv_x45_3.jpg","rv_x47_6":"assets/pants/rv_x47_6.jpg","rv_x43_6":"assets/pants/rv_x43_6.jpg","rv_x51_10":"assets/pants/rv_x51_10.jpg","rv_x37_7":"assets/pants/rv_x37_7.jpg","rv_x45_10":"assets/pants/rv_x45_10.jpg","rv_x54_2":"assets/pants/rv_x54_2.jpg","rv_x16_4":"assets/pants/rv_x16_4.jpg","rv_x46_7":"assets/pants/rv_x46_7.jpg","rv_x59_9":"assets/pants/rv_x59_9.jpg","rv_x43_7":"assets/pants/rv_x43_7.jpg","rv_x40_3":"assets/pants/rv_x40_3.jpg","rv_x57_3":"assets/pants/rv_x57_3.jpg","rv_x48_3":"assets/pants/rv_x48_3.jpg","rv_x26_1":"assets/pants/rv_x26_1.jpg","rv_x49_7":"assets/pants/rv_x49_7.jpg","rv_x31_4":"assets/pants/rv_x31_4.jpg","rv_x38_9":"assets/pants/rv_x38_9.jpg","rv_x46_4":"assets/pants/rv_x46_4.jpg","rv_x36_6":"assets/pants/rv_x36_6.jpg","rv_x33_2":"assets/pants/rv_x33_2.jpg","rv_x16_7":"assets/pants/rv_x16_7.jpg","rv_x58_7":"assets/pants/rv_x58_7.jpg","rv_x54_3":"assets/pants/rv_x54_3.jpg","rv_x22_1":"assets/pants/rv_x22_1.jpg","rv_x46_1":"assets/pants/rv_x46_1.jpg","rv_x35_7":"assets/pants/rv_x35_7.jpg","rv_x44_6":"assets/pants/rv_x44_6.jpg","rv_x36_2":"assets/pants/rv_x36_2.jpg","rv_x47_1":"assets/pants/rv_x47_1.jpg","rv_x8_7":"assets/pants/rv_x8_7.jpg","rv_x23_3":"assets/pants/rv_x23_3.jpg","rv_x27_2":"assets/pants/rv_x27_2.jpg","rv_x50_1":"assets/pants/rv_x50_1.jpg","rv_x36_5":"assets/pants/rv_x36_5.jpg","rv_x25_10":"assets/pants/rv_x25_10.jpg","rv_x33_7":"assets/pants/rv_x33_7.jpg","rv_x58_1":"assets/pants/rv_x58_1.jpg","rv_x42_1":"assets/pants/rv_x42_1.jpg","rv_x38_7":"assets/pants/rv_x38_7.jpg","rv_x8_5":"assets/pants/rv_x8_5.jpg","rv_x27_5":"assets/pants/rv_x27_5.jpg","rv_x3_4":"assets/pants/rv_x3_4.jpg","rv_x8_2":"assets/pants/rv_x8_2.jpg","rv_x35_6":"assets/pants/rv_x35_6.jpg","rv_x56_2":"assets/pants/rv_x56_2.jpg","rv_x28_4":"assets/pants/rv_x28_4.jpg","rv_x44_2":"assets/pants/rv_x44_2.jpg","rv_x62_10":"assets/pants/rv_x62_10.jpg","rv_x26_8":"assets/pants/rv_x26_8.jpg","rv_x39_6":"assets/pants/rv_x39_6.jpg","rv_x3_1":"assets/pants/rv_x3_1.jpg","rv_x40_8":"assets/pants/rv_x40_8.jpg","rv_x41_1":"assets/pants/rv_x41_1.jpg","rv_x54_4":"assets/pants/rv_x54_4.jpg","rv_x61_4":"assets/pants/rv_x61_4.jpg","rv_x35_1":"assets/pants/rv_x35_1.jpg","rv_x40_2":"assets/pants/rv_x40_2.jpg","rv_x59_8":"assets/pants/rv_x59_8.jpg","rv_x38_4":"assets/pants/rv_x38_4.jpg","rv_x27_4":"assets/pants/rv_x27_4.jpg","rv_x48_9":"assets/pants/rv_x48_9.jpg","rv_x51_9":"assets/pants/rv_x51_9.jpg","rv_x28_2":"assets/pants/rv_x28_2.jpg","rv_x45_2":"assets/pants/rv_x45_2.jpg","rv_x51_5":"assets/pants/rv_x51_5.jpg","rv_x36_3":"assets/pants/rv_x36_3.jpg","rv_x49_3":"assets/pants/rv_x49_3.jpg","rv_x26_4":"assets/pants/rv_x26_4.jpg","rv_x50_2":"assets/pants/rv_x50_2.jpg","rv_x49_6":"assets/pants/rv_x49_6.jpg","rv_x35_8":"assets/pants/rv_x35_8.jpg","rv_x25_7":"assets/pants/rv_x25_7.jpg","rv_x54_5":"assets/pants/rv_x54_5.jpg","rv_x27_7":"assets/pants/rv_x27_7.jpg","rv_x51_8":"assets/pants/rv_x51_8.jpg","rv_x34_3":"assets/pants/rv_x34_3.jpg","rv_x62_6":"assets/pants/rv_x62_6.jpg","rv_x48_7":"assets/pants/rv_x48_7.jpg","rv_x58_8":"assets/pants/rv_x58_8.jpg","rv_x37_6":"assets/pants/rv_x37_6.jpg","rv_x25_8":"assets/pants/rv_x25_8.jpg","rv_x23_1":"assets/pants/rv_x23_1.jpg","rv_x45_9":"assets/pants/rv_x45_9.jpg","rv_x57_2":"assets/pants/rv_x57_2.jpg","rv_x8_6":"assets/pants/rv_x8_6.jpg","rv_x49_4":"assets/pants/rv_x49_4.jpg","rv_x16_3":"assets/pants/rv_x16_3.jpg","rv_x37_5":"assets/pants/rv_x37_5.jpg","rv_x37_10":"assets/pants/rv_x37_10.jpg","rv_x26_9":"assets/pants/rv_x26_9.jpg","rv_x53_6":"assets/pants/rv_x53_6.jpg","rv_x39_9":"assets/pants/rv_x39_9.jpg","rv_x33_5":"assets/pants/rv_x33_5.jpg","rv_x51_7":"assets/pants/rv_x51_7.jpg","rv_x38_1":"assets/pants/rv_x38_1.jpg","rv_x19_2":"assets/pants/rv_x19_2.jpg","rv_x3_5":"assets/pants/rv_x3_5.jpg","rv_x43_8":"assets/pants/rv_x43_8.jpg","rv_x19_1":"assets/pants/rv_x19_1.jpg","rv_x46_9":"assets/pants/rv_x46_9.jpg","rv_x41_3":"assets/pants/rv_x41_3.jpg","rv_x57_6":"assets/pants/rv_x57_6.jpg","rv_x30_3":"assets/pants/rv_x30_3.jpg","rv_x45_5":"assets/pants/rv_x45_5.jpg","rv_x62_4":"assets/pants/rv_x62_4.jpg","rv_x46_6":"assets/pants/rv_x46_6.jpg","rv_x40_9":"assets/pants/rv_x40_9.jpg","rv_x45_7":"assets/pants/rv_x45_7.jpg","rv_x45_4":"assets/pants/rv_x45_4.jpg","rv_x39_1":"assets/pants/rv_x39_1.jpg","rv_x59_6":"assets/pants/rv_x59_6.jpg","rv_x62_8":"assets/pants/rv_x62_8.jpg","rv_x33_8":"assets/pants/rv_x33_8.jpg","rv_x53_3":"assets/pants/rv_x53_3.jpg","rv_x28_1":"assets/pants/rv_x28_1.jpg","rv_x62_9":"assets/pants/rv_x62_9.jpg","rv_x59_7":"assets/pants/rv_x59_7.jpg","rv_x26_6":"assets/pants/rv_x26_6.jpg","rv_x60_1":"assets/pants/rv_x60_1.jpg","rv_x47_4":"assets/pants/rv_x47_4.jpg","rv_x37_3":"assets/pants/rv_x37_3.jpg","rv_x44_8":"assets/pants/rv_x44_8.jpg","rv_x13_1":"assets/pants/rv_x13_1.jpg","rv_x41_4":"assets/pants/rv_x41_4.jpg","rv_x35_3":"assets/pants/rv_x35_3.jpg","rv_x39_2":"assets/pants/rv_x39_2.jpg","rv_x54_1":"assets/pants/rv_x54_1.jpg","rv_x42_7":"assets/pants/rv_x42_7.jpg","rv_x46_2":"assets/pants/rv_x46_2.jpg","rv_x33_3":"assets/pants/rv_x33_3.jpg","rv_x2_1":"assets/pants/rv_x2_1.jpg","rv_x42_4":"assets/pants/rv_x42_4.jpg","rv_x40_5":"assets/pants/rv_x40_5.jpg","rv_x41_8":"assets/pants/rv_x41_8.jpg","rv_x39_4":"assets/pants/rv_x39_4.jpg","rv_x55_3":"assets/pants/rv_x55_3.jpg","rv_x27_6":"assets/pants/rv_x27_6.jpg","rv_x41_2":"assets/pants/rv_x41_2.jpg","rv_x48_8":"assets/pants/rv_x48_8.jpg","rv_x39_8":"assets/pants/rv_x39_8.jpg","rv_x33_4":"assets/pants/rv_x33_4.jpg","rv_x42_3":"assets/pants/rv_x42_3.jpg","rv_x61_2":"assets/pants/rv_x61_2.jpg","rv_x59_3":"assets/pants/rv_x59_3.jpg","rv_x51_3":"assets/pants/rv_x51_3.jpg","rv_x16_5":"assets/pants/rv_x16_5.jpg","rv_x25_1":"assets/pants/rv_x25_1.jpg","rv_x33_1":"assets/pants/rv_x33_1.jpg","rv_x38_3":"assets/pants/rv_x38_3.jpg","rv_x38_10":"assets/pants/rv_x38_10.jpg","rv_x24_9":"assets/pants/rv_x24_9.jpg","rv_x43_4":"assets/pants/rv_x43_4.jpg","rv_x31_3":"assets/pants/rv_x31_3.jpg","rv_x54_7":"assets/pants/rv_x54_7.jpg","rv_x52_7":"assets/pants/rv_x52_7.jpg","rv_x3_3":"assets/pants/rv_x3_3.jpg","rv_x3_2":"assets/pants/rv_x3_2.jpg","rv_x40_4":"assets/pants/rv_x40_4.jpg","rv_x62_1":"assets/pants/rv_x62_1.jpg","rv_x42_5":"assets/pants/rv_x42_5.jpg","rv_x24_3":"assets/pants/rv_x24_3.jpg","rv_x60_4":"assets/pants/rv_x60_4.jpg","rv_x52_1":"assets/pants/rv_x52_1.jpg","rv_x33_6":"assets/pants/rv_x33_6.jpg","rv_x59_2":"assets/pants/rv_x59_2.jpg","rv_x55_2":"assets/pants/rv_x55_2.jpg","rv_x27_9":"assets/pants/rv_x27_9.jpg","rv_x40_1":"assets/pants/rv_x40_1.jpg","rv_x34_5":"assets/pants/rv_x34_5.jpg","rv_x28_3":"assets/pants/rv_x28_3.jpg","rv_x58_6":"assets/pants/rv_x58_6.jpg","rv_x29_1":"assets/pants/rv_x29_1.jpg","rv_x62_2":"assets/pants/rv_x62_2.jpg","rv_x35_4":"assets/pants/rv_x35_4.jpg","rv_x19_3":"assets/pants/rv_x19_3.jpg","rv_x60_5":"assets/pants/rv_x60_5.jpg","rv_x25_4":"assets/pants/rv_x25_4.jpg","rv_x43_9":"assets/pants/rv_x43_9.jpg","rv_x35_2":"assets/pants/rv_x35_2.jpg","rv_x49_2":"assets/pants/rv_x49_2.jpg","rv_x43_2":"assets/pants/rv_x43_2.jpg","rv_x56_3":"assets/pants/rv_x56_3.jpg","rv_x50_3":"assets/pants/rv_x50_3.jpg","rv_x34_2":"assets/pants/rv_x34_2.jpg","rv_x53_8":"assets/pants/rv_x53_8.jpg","rv_x44_7":"assets/pants/rv_x44_7.jpg","rv_x1_1":"assets/pants/rv_x1_1.jpg","rv_x46_5":"assets/pants/rv_x46_5.jpg","rv_x62_5":"assets/pants/rv_x62_5.jpg","rv_x52_9":"assets/pants/rv_x52_9.jpg","rv_x62_3":"assets/pants/rv_x62_3.jpg","rv_x24_8":"assets/pants/rv_x24_8.jpg","rv_x16_1":"assets/pants/rv_x16_1.jpg","rv_x33_9":"assets/pants/rv_x33_9.jpg","rv_x53_7":"assets/pants/rv_x53_7.jpg","rv_x46_8":"assets/pants/rv_x46_8.jpg","rv_x61_3":"assets/pants/rv_x61_3.jpg","rv_x47_2":"assets/pants/rv_x47_2.jpg","rv_x45_6":"assets/pants/rv_x45_6.jpg","rv_x49_1":"assets/pants/rv_x49_1.jpg","rv_x39_5":"assets/pants/rv_x39_5.jpg","rv_x60_2":"assets/pants/rv_x60_2.jpg","rv_x37_1":"assets/pants/rv_x37_1.jpg","rv_x38_6":"assets/pants/rv_x38_6.jpg","rv_x16_6":"assets/pants/rv_x16_6.jpg","rv_x39_7":"assets/pants/rv_x39_7.jpg","rv_x44_4":"assets/pants/rv_x44_4.jpg","rv_x25_3":"assets/pants/rv_x25_3.jpg","rv_x57_1":"assets/pants/rv_x57_1.jpg","rv_x38_2":"assets/pants/rv_x38_2.jpg","rv_x37_8":"assets/pants/rv_x37_8.jpg","rv_x35_5":"assets/pants/rv_x35_5.jpg","rv_x58_4":"assets/pants/rv_x58_4.jpg","rv_x42_6":"assets/pants/rv_x42_6.jpg","rv_x32_1":"assets/pants/rv_x32_1.jpg","rv_x8_8":"assets/pants/rv_x8_8.jpg","rv_x52_2":"assets/pants/rv_x52_2.jpg","rv_x43_5":"assets/pants/rv_x43_5.jpg","rv_x58_2":"assets/pants/rv_x58_2.jpg","rv_x25_2":"assets/pants/rv_x25_2.jpg","rv_x34_1":"assets/pants/rv_x34_1.jpg","rv_x53_4":"assets/pants/rv_x53_4.jpg","rv_x26_7":"assets/pants/rv_x26_7.jpg","rv_x44_9":"assets/pants/rv_x44_9.jpg","rv_x28_5":"assets/pants/rv_x28_5.jpg","rv_x55_6":"assets/pants/rv_x55_6.jpg","rv_x35_10":"assets/pants/rv_x35_10.jpg","rv_x53_9":"assets/pants/rv_x53_9.jpg","rv_x7_1":"assets/pants/rv_x7_1.jpg","rv_x33_10":"assets/pants/rv_x33_10.jpg","rv_x35_9":"assets/pants/rv_x35_9.jpg","rv_x51_6":"assets/pants/rv_x51_6.jpg","rv_x49_8":"assets/pants/rv_x49_8.jpg","rv_x48_4":"assets/pants/rv_x48_4.jpg","rv_x40_10":"assets/pants/rv_x40_10.jpg","rv_x55_1":"assets/pants/rv_x55_1.jpg","rv_x48_6":"assets/pants/rv_x48_6.jpg","rv_x53_5":"assets/pants/rv_x53_5.jpg","rv_x52_6":"assets/pants/rv_x52_6.jpg","rv_x52_4":"assets/pants/rv_x52_4.jpg","rv_x59_5":"assets/pants/rv_x59_5.jpg","rv_x34_6":"assets/pants/rv_x34_6.jpg","rv_x49_5":"assets/pants/rv_x49_5.jpg","rv_x37_9":"assets/pants/rv_x37_9.jpg","rv_x61_1":"assets/pants/rv_x61_1.jpg","rv_x55_4":"assets/pants/rv_x55_4.jpg","rv_x45_8":"assets/pants/rv_x45_8.jpg","rv_x37_4":"assets/pants/rv_x37_4.jpg"}</script>
 <!-- 리뷰 데이터를 바꾸려면 같은 폴더에 reviews.js 를 두면 됩니다 (형식은 아래 R 배열과 동일, window.REVIEWS_EXT = [...]) -->
-<script src="config.js?v=8"></script>
-<script src="lab.js?v=8"></script>
+<script src="config.js?v=9"></script>
+<script src="lab.js?v=9"></script>
 </head>
 <body>
 <div class="study" id="study"><span>과제: 리뷰를 보고 구매 여부를 정해 주세요</span><button data-a="decide">구매 결정하기</button></div>
@@ -383,7 +384,6 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
     <div class="aisec"><div class="sumh"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#spark"/></svg>이 상품에 맞춘 AI 선택칩 <span class="aib">AI</span></div>
       <div class="sum col" id="sum"></div>
     </div>
-    <div class="aibar-host"></div>
     <div id="plist" style="margin-top:8px"></div>
     <button class="btn2" data-a="all">리뷰 전체보기 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 5 7 7-7 7"/></svg></button>
   </section>
@@ -411,7 +411,7 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
       <label class="fc fsel" id="fstar"><span id="fstarl">별점 전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><select id="starsel" aria-label="별점으로 보기"><option value="0">별점 전체</option><option value="5">5점만</option><option value="4">4점만</option><option value="3">3점만</option><option value="2">2점만</option><option value="1">1점만</option></select></label>
       <label class="fc" id="fpho"><input type="checkbox" id="pho" checked><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>사진/동영상</label>
     </div>
-    <div class="aibar-host"></div>
+    <div class="expsort"><button id="sx" data-a="sort" data-v="exp" aria-pressed="false"><span><b>경험 리뷰어 등급순으로 보기</b><small>경험을 풍부하게 쓴 리뷰어(1등급)의 리뷰부터 보여줘요</small></span><span class="xb"><em class="gr g1">1</em><em class="gr g2">2</em><em class="gr g3">3</em><em class="gr g4">4</em><em class="gr g5">5</em></span></button></div>
     <div class="fz-ai">
       <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>이 상품 후기에서 AI가 뽑았어요</small></div>
       <div class="cats" id="cats" role="group" aria-label="AI 맞춤 선택칩"></div>
@@ -569,13 +569,10 @@ const R_DEFAULT=[
 ];
 const R=(Array.isArray(window.REVIEWS_EXT)&&window.REVIEWS_EXT.length?window.REVIEWS_EXT:R_DEFAULT).map((r,i)=>({ph:[],c:[],o:{},h:0,hd:'',...r,id:i}));
 /* ===== P2 데이터 주석 =====
- AI_OVERRIDE: {리뷰번호:'full'|'part'|'none'} 으로 AI 표시를 직접 지정할 수 있습니다.
- TEMP_OVERRIDE: {'닉네임':퍼센트 또는 null} 으로 리뷰온도를 직접 지정할 수 있습니다.
- 리뷰온도는 AI스러운 글(이모지·긴 줄글·구조화된 문체)일수록 낮고 직접 쓴 글일수록 높게 자동 설정됩니다.
- 기본값은 연구용 시뮬레이션(규칙 기반)입니다. */
-const CHIP_SPECS=[{"id": "h1", "label": "키 160cm 이하", "h": [140, 160]}, {"id": "h2", "label": "키 161~170cm", "h": [161, 170]}, {"id": "h3", "label": "키 171~180cm", "h": [171, 180]}, {"id": "h4", "label": "키 181cm 이상", "h": [181, 215]}, {"id": "sz0", "label": "정사이즈예요", "o": ["사이즈", "정사이즈"], "re": "정사이즈|딱 맞|잘 맞|딱맞|잘맞"}, {"id": "sz1", "label": "생각보다 커요", "o": ["사이즈", "커요"], "re": "(크게 나|크게나|커요|큽니다|큰 편|넉넉|오버핏|헐렁)", "nt": "(안|않|너무 ?크지|크지 않)\\s?(커|큰|크)"}, {"id": "sz2", "label": "생각보다 작아요", "o": ["사이즈", "작아요"], "re": "(작게 나|작게나|작아요|작습니다|작은 편|타이트|끼어요|끼는)", "nt": "(안|않)\\s?작"}, {"id": "big", "label": "큰 사이즈 (3XL~)", "ob": ["평소 사이즈", "(3|4|5)\\s?xl|110|105|34"], "re": "(빅사이즈|3xl|4xl|5xl|xxxl|3엑스|4엑스|5엑스|100kg|9\\d ?kg|1[0-4]\\d ?kg)"}, {"id": "wst", "label": "허리 끈·조절", "re": "(허리[^.\\n]{0,12}(끈|조절|줄|묶|헐렁|여유|조이|꽉)|끈|스트링|조절)"}, {"id": "len", "label": "기장이 길어요", "re": "(기장[^.\\n]{0,10}(길|김|남)|길이[^.\\n]{0,8}(길|김|남)|바지[^.\\n]{0,6}(길어|길다|길고)|밑단[^.\\n]{0,8}(수선|줄|접))", "nt": "(길지 않|안 ?길)"}, {"id": "fur", "label": "기모·보온", "re": "(기모|따뜻|따듯|보온|겨울|도톰|두툼)"}, {"id": "thin", "label": "사계절·얇은 두께", "re": "(얇|시원|여름|봄|가을|사계절|환절기)"}, {"id": "see", "label": "비침·속옷 라인", "re": "(비침|비치|속옷)"}, {"id": "wash", "label": "보풀·물빠짐·수축", "re": "(보풀|물빠|물 ?빠짐|수축|줄어|늘어나|구김|세탁 후)"}, {"id": "kid", "label": "아이·학생이 입어요", "re": "(아들|딸|아이|학생|중학|고등|초등|손자|조카)"}, {"id": "gift", "label": "선물·가족용", "re": "(선물|아빠|아버|남편|신랑|엄마|어머|부모)"}, {"id": "work", "label": "작업복·운동복", "re": "(작업복|작업할|현장|체육|등산|러닝|골프|헬스)"}];
-const AI_OVERRIDE={};
-const TEMP_OVERRIDE={};
+ GRADE_OVERRIDE: {'닉네임':1~5} 로 경험 리뷰어 등급을 직접 지정할 수 있습니다.
+ 기본값은 자기소개·상황·추천 대상 서술이 풍부한 정도를 규칙으로 계산한 연구용 시뮬레이션입니다. */
+const CHIP_SPECS=[{"id": "h1", "label": "키 160cm 이하", "h": [140, 160]}, {"id": "h2", "label": "키 161~170cm", "h": [161, 170]}, {"id": "h3", "label": "키 171~180cm", "h": [171, 180]}, {"id": "h4", "label": "키 181cm 이상", "h": [181, 215]}, {"id": "sz0", "label": "정사이즈예요", "o": ["사이즈", "정사이즈"], "re": "정사이즈|딱 맞|잘 맞|딱맞|잘맞"}, {"id": "sz1", "label": "생각보다 커요", "o": ["사이즈", "커요"], "re": "(크게 나|크게나|커요|큽니다|큰 편|넉넉|오버핏|헐렁)", "nt": "(안|않|너무 ?크지|크지 않)\\s?(커|큰|크)"}, {"id": "sz2", "label": "생각보다 작아요", "o": ["사이즈", "작아요"], "re": "(작게 나|작게나|작아요|작습니다|작은 편|타이트|끼어요|끼는)", "nt": "(안|않)\\s?작"}, {"id": "big", "label": "큰 사이즈 (3XL~)", "ob": ["평소 사이즈", "(3|4|5)\\s?xl|110|105|34"], "re": "(빅사이즈|3xl|4xl|5xl|xxxl|3엑스|4엑스|5엑스|100kg|9\\d ?kg|1[0-4]\\d ?kg)"}, {"id": "wst", "label": "허리 끈·조절", "re": "(허리[^.\\n]{0,12}(끈|조절|줄|묶|헐렁|여유|조이|꽉)|끈|스트링|조절)"}, {"id": "len", "neg": true, "label": "기장이 길어요", "re": "(기장[^.\\n]{0,10}(길|김|남)|길이[^.\\n]{0,8}(길|김|남)|바지[^.\\n]{0,6}(길어|길다|길고)|밑단[^.\\n]{0,8}(수선|줄|접))", "nt": "(길지 않|안 ?길)"}, {"id": "fur", "label": "기모·보온", "re": "(기모|따뜻|따듯|보온|겨울|도톰|두툼)"}, {"id": "thin", "label": "사계절·얇은 두께", "re": "(얇|시원|여름|봄|가을|사계절|환절기)"}, {"id": "see", "label": "비침·속옷 라인", "re": "(비침|비치|속옷)"}, {"id": "wash", "label": "보풀·물빠짐·수축", "re": "(보풀|물빠|물 ?빠짐|수축|줄어|늘어나|구김|세탁 후)"}, {"id": "kid", "label": "아이·학생이 입어요", "re": "(아들|딸|아이|학생|중학|고등|초등|손자|조카)"}, {"id": "gift", "label": "선물·가족용", "re": "(선물|아빠|아버|남편|신랑|엄마|어머|부모)"}, {"id": "work", "label": "작업복·운동복", "re": "(작업복|작업할|현장|체육|등산|러닝|골프|헬스)"}];
+const GRADE_OVERRIDE={};
 /* ===== P2 코어: 선택칩 태깅 / AI 표시 / 리뷰온도 (시뮬레이션) ===== */
 const rxc={};const RX=s=>rxc[s]||(rxc[s]=new RegExp(s,'i'));
 function r_clean(b){return b.split('\n').filter(l=>!/^\s*(본 리뷰는 해당 상품|쿠팡 ?체험단 이벤트|4점 이상 리뷰가 좋은|\(솔직하게)/.test(l)&&!/체험단 이벤트로 상품을 무료/.test(l)).join('\n').trim()}
@@ -587,89 +584,74 @@ function r_height(r){
   return n;
 }
 /* 반환: null(해당 없음) | ''(항목 정보로 해당) | 문장(본문 근거) */
+const NEG_HYPO=/(면\s|다면|이면|려면|ㄹ까|할까|걱정|줄 알|던데|기존|쓰던|이전|예전|전에는|않을까)/;
+const NEG_OK=/(편했|편하|괜찮|만족|좋았|좋아요|좋네요|빠르|지원하니|지원해|덕분|없었|않았|않아|없이|없어|해결)/;
 function chipHit(r,sp){
   if(sp.h){const n=r_height(r);return n>=sp.h[0]&&n<=sp.h[1]?'':null}
   if(sp.o&&r.o&&r.o[sp.o[0]]&&r.o[sp.o[0]].indexOf(sp.o[1])>=0)return '';
   if(sp.ob&&r.o&&r.o[sp.ob[0]]&&RX(sp.ob[1]).test(r.o[sp.ob[0]]))return '';
-  if(sp.re&&!(sp.ms&&r.s>sp.ms)){const re=RX(sp.re),nt=sp.nt?RX(sp.nt):null;
-    for(const s of r_sents(r)){if(re.test(s)&&!(nt&&nt.test(s)))return s}}
+  if(sp.re&&!(sp.ms&&r.s>sp.ms)&&!(sp.xo&&r.o&&r.o[sp.xo[0]]&&RX(sp.xo[1]).test(r.o[sp.xo[0]]))){const re=RX(sp.re),nt=sp.nt?RX(sp.nt):null;
+    for(const s of r_sents(r)){const m=re.exec(s);if(!m||(nt&&nt.test(s)))continue;
+      if(sp.neg){ /* 부정 칩: 가정·과거 제품·이후에 해소되는 문장은 제외 */
+        if(NEG_HYPO.test(s))continue;
+        if(NEG_OK.test(s.slice(m.index+m[0].length)))continue}
+      return s}}
   return null;
 }
 function tagReview(r){r.t=[];for(const sp of CHIP_SPECS)if(chipHit(r,sp)!==null)r.t.push(sp.id)}
-/* AI 사용 여부 판정 v2 (더 엄격): full=AI 작성, part=AI 도움, none=직접 작성 */
-function aiScore(r){
+/* 경험 리뷰어 등급 (연구용 시뮬레이션 규칙)
+   상품 정보·장점 나열이 아니라 '내가 어떤 사람인지 / 어떤 상황에서 잘 맞았는지 / 어떤 사람에게 추천하는지'를 풍부하게 쓴 정도 */
+const RE_SELF=/(저는|제가|저의|제 (키|체형|몸|피부|손|발|아이|딸|아들|남편|아내|친구|직업|일)|[2-6]0대|[2-6]\d살|직장인|대학생|학생이|주부|워킹맘|자취|엄마|아빠|부부|신혼|남편|아내|아들|딸|아이|운동(을)? ?(하는|즐기|좋아|매일)|헬스|\d{2,3} ?(cm|kg|센티)|키가|체형|통통|마른|건장|뚱뚱|골반|허벅지|어깨|발볼|손이 작|평소|고등학생|중학생|초등학생|대학생|(?:^|\s)(?:전|저|난|내가|나는|제가|우리) |(?:^|\s)(?:친구|동생|언니|오빠|지인|동료)|신랑|와이프)/g;
+const RE_SIT=/(잘 맞|잘맞|딱 맞|딱맞|어울|할 때|할때|하는 경우|경우에|상황|출퇴근|통근|등하교|집에서|사무실|매일|자주|요즘|처음|이전에|예전에|전에는|쓰던|써봤|써 ?봤|사용해 ?보니|써보니|쓰다 ?보니|먹어 ?보니|입어 ?보니|비교|대신|바꿔|갈아탔|재구매|두 번째|세 ?번째|몇 번|한 달|일주일|\d+ ?(주|개월|달|일) )/g;
+const RE_REC=/(추천(드려요|드립니다|해요|합니다|해드려요|하고 ?싶|합니다|할게요|드리고)|분들?(께|에게|한테)?[^.\n]{0,14}추천|추천[^.\n]{0,12}(분들?|사람|대상)|이런 (분|사람)|(분들|사람)(은|이|께서)[^.\n]{0,12}(좋|맞|편)|비추|권하고 ?싶)/g;
+const RE_REASON=/(그래서|때문에|덕분에|아쉬운|아쉽|다만|하지만|반면|대신에|걱정했|생각했는데|줄 알았|기대했|고민했|망설였)/g;
+const RE_NARR=/(더라(구요|고요|구|고)|했는데|였는데|이었는데|하니까|했더니|하더니|뺐|열었|뜯었|써보|써 ?봤|사용해 ?보|해보니|입어 ?보|먹어 ?보|느꼈|느껴졌|생각보다|막상|알았|몰랐|샀는데|샀다가|사려다|구입했|구매했|주문했|받았는데|받아보니|왔어요|왔는데|쓰고 있|쓰는 중|사용 중|한 달째|째 사용|\d+ ?(주|개월|달|년) ?(째|동안|정도 (써|사용|입|먹))|하는데|했네요|하네요|이더라|거든요|잖아요|인데요|이에요|였어요)/g;
+const RE_DETAIL=/(제 ?품 ?(특징|정보|명|스펙)|상품 ?(특징|정보|명)|스펙|정격|사양|제조국|판매원|모델명|사 ?이 ?즈 ?[:：]|무 ?게 ?[:：]|소재|KC|인증|배상|보장|난연|고밀도|최적화|풀스펙|동시 ?충전|지원합니다|지원해요|지원하여|지원하는|탑재|채택|적용되어|구성되어|특징은|장점은|보호 ?기능|안전 ?(인증|장치)|브랜드|라인업|디테일)/g;
+function expScore(r){
   const t=r_txt(r),L=t.length;let sc=0;
-  const sents=r_sents(r).filter(x=>x.length>4),N=Math.max(1,sents.length);
-  /* 구조화: 번호 목록, 소제목, 기호 */
-  const num=(t.match(/(^|\s)\d[.)]\s/g)||[]).length; if(num>=3)sc+=2; else if(num>=2)sc+=1;
-  const emo=(t.match(/[\p{Extended_Pictographic}✔✅☑★●■▶◆♥❤✨]/gu)||[]).length; if(emo>=3)sc+=2; else if(emo>=1)sc+=1;
-  if(/[《》【】\[\]<>]/.test(t))sc+=1;
-  if(/\n\s*(구매 ?(동기|이유|계기)|배송|포장|총평|장점|단점|아쉬운 ?점|추천|사용감|착용감|맛|디자인|가격|품질|성능)\s*[:：\-]?\s*\n?/.test(r.b))sc+=1;
-  if(/(장점|단점)/.test(t)&&/(구매\s?(동기|이유|계기)|배송|총평|추천)/.test(t))sc+=1;
-  if(/(총평|한줄평|한 줄 평|결론적으로|종합적으로|전반적으로|총체적으로|요약하자면|정리하자면|솔직 ?(담백)?\s?(후기|리뷰)|내돈내산)/.test(t))sc+=1;
-  /* 광고 문구, 정돈된 칭찬 어휘 */
-  const ph=(t.match(/(추천드립니다|추천합니다|만족스럽(습니다|네요|었|어요)|인상적|돋보|완벽|감탄|무엇보다|가장 (큰|마음에|만족)|활용도|활용하기|부담 ?없(이|는)|편안한 착용감|착용감이|합리적|알차|두루|제격|강력 ?추천|적극 ?추천|꼭 ?한번|한 번쯤|확실히|덕분에|는 점이|선사|보장|손색(이)? 없|적합|우수|뛰어나|탁월|실용성|실용적|효과적|자연스럽게|깔끔하게|다양한|편리|매력|안성맞춤|든든|센스|퀄리티|가성비가 (좋|뛰어)|만족도가 높|높은 만족|기대 ?이상|부족함 ?(이 )?없|흠잡을|아쉬움 ?(이 )?없|데일리|일상(복|용)?|코디|연출|고급스럽|세련|산뜻|은은|어우러|조화|또한|뿐만 아니라|더불어|아울러|한편|게다가)/g)||[]).length;
-  const phr=ph/N;
-  if(ph>=7)sc+=3;else if(ph>=4)sc+=2;else if(ph>=2)sc+=1;
-  if(phr>=0.8)sc+=1;
-  /* 문어체(합쇼체) 비율 */
-  const formal=sents.filter(x=>/(습니다|입니다|됩니다|드립니다|십시오|합니다|었습니다|였습니다)[.!]?$/.test(x)).length;
-  if(formal/N>=0.6&&N>=2)sc+=2;else if(formal/N>=0.35)sc+=1;
-  /* 1인칭 경험 없이 상품 설명만 하는 글 */
-  const fp=/(저는|제가|저희|전 |나는|내가|우리|남편|아내|와이프|신랑|아이|아들|딸|엄마|아빠|동생|친구|회사|집에서|출근|퇴근|운동하|헬스|주문했|샀는데|사봤|구매했|시켰|받아보|먹어보|입어보|써보|신어보)/.test(t);
-  if(!fp)sc+=2;
-  /* 문장 길이가 고르고 긴 정돈된 글 */
-  const lens=sents.map(x=>x.length),avg=lens.reduce((a,b)=>a+b,0)/N;
-  const sd=Math.sqrt(lens.reduce((a,b)=>a+(b-avg)**2,0)/N);
-  if(N>=3&&avg>=35&&sd/avg<0.45)sc+=1;
-  if(L>=700)sc+=1; if(L>=1000)sc+=1;
-  const paras=t.split(/\n+/).filter(x=>x.trim()).length;
-  if(L>=500&&L/paras>=220)sc+=1;
-  /* 사람 냄새: 구어체, 감정, 오타, 맞춤법 */
-  const strong=(t.match(/(ㅋ{2,}|ㅠ+|ㅜ+|ㅎ{2,}|;;|ㅡㅡ|ㅈㄴ|ㅅㅂ|ㄹㅇ|ㄷㄷ|헐|에바|\.{3,}|…{1,}|\?{2,}|!{3,}|[가-힣][ㄱ-ㅎㅏ-ㅣ]|[ㄱ-ㅎ]{2,})/g)||[]).length;
-  const weak=(t.match(/(넘 |걍|쫌|암튼|근데|대박|짱|요ㅎ|~~|햇|엇다|앗어|드라구|더라구|구요|당~|용!|네용|어용)/g)||[]).length;
-  const hum=strong+(weak>=2?1:0);
-  if(strong>=3)sc-=4;else if(strong>=1)sc-=2;
-  if(weak>=3)sc-=2;else if(weak>=1)sc-=1;
-  /* 띄어쓰기를 무시한 긴 덩어리 (사람이 급하게 쓴 흔적) */
-  if((t.match(/[가-힣]{13,}/g)||[]).length>=2)sc-=1;
-  if(/(제품 ?요약|결론부터 말(씀드리|하)|한마디로|요약하면|&\s?별점|구매 ?후기입니다|솔직 리뷰)/.test(t))sc+=1;
-  const lab=r_clean(r.b).split('\n').map(x=>x.trim()).filter(x=>x&&x.length<=14&&!/[.!?~ㅋㅎㅠ]$/.test(x)).length;
-  if(lab>=3)sc+=1;
-  if(L<60&&!formal)sc-=2;
-  if(r.s<=2&&L<300)sc-=2;
-  if(r.s<=2&&hum>=1)sc-=1;
+  const lines=t.split(/\n/).map(x=>x.trim()).filter(Boolean);
+  const self=(t.match(RE_SELF)||[]).length, sit=(t.match(RE_SIT)||[]).length, rec=(t.match(RE_REC)||[]).length, rs=(t.match(RE_REASON)||[]).length, nar=(t.match(RE_NARR)||[]).length;
+  /* 경험·배경 서술: 가산 */
+  sc+= self>=4?3:self>=2?2:self>=1?1:0;
+  sc+= self>=1?(sit>=4?3:sit>=2?2:sit>=1?1:0):(sit>=2?1:0);
+  sc+= rec>=2?3:rec>=1?2:0;
+  sc+= nar>=8?4:nar>=5?3:nar>=3?2:nar>=1?1:0;
+  sc+= rs>=3?1:0;
+  if(self+rec+nar>=3){if(L>=200)sc+=1; if(L>=500)sc+=1}
+  /* 담백하게 줄 단위로 써내려간 글 */
+  const avg=lines.reduce((a,x)=>a+x.length,0)/Math.max(1,lines.length);
+  if(lines.length>=5&&avg<45&&nar>=2)sc+=1;
+  if(/(ㅋ{2,}|ㅠ{2,}|ㅜ{2,}|ㅎ{2,}|;;|\?\?|\.\.)/.test(t)&&nar>=1)sc+=1;
+  /* 상세페이지·스펙 나열형: 감점 */
+  const det=(t.match(RE_DETAIL)||[]).length;
+  sc-= det>=6?5:det>=4?4:det>=2?2:det>=1?1:0;
+  const bul=lines.filter(x=>/^[•·▪▶✔✅☑\-\*]/.test(x)).length;
+  if(bul>=4)sc-=3;else if(bul>=2)sc-=1;
+  if(/[✔✅☑]\s?(제품|상품|총평|장점|단점|특징|정보|스펙)/.test(t)||/^\s*\[.{3,40}\]\s*$/m.test(t))sc-=2;
+  const num=(t.match(/(^|\s)\d\.\s/g)||[]).length; if(num>=3)sc-=2;
+  const spec=(t.match(/\d[\d,\.]* ?(mAh|Wh|W|V|mm|kg|g|cm)\b/gi)||[]).length; if(spec>=6)sc-=2;else if(spec>=3&&self+nar<4)sc-=1;
+  /* AI스러운 매끈한 홍보 문체: 감점 */
+  const ph=(t.match(/(추천드립니다|만족스럽(습니다|네요)|인상적|돋보|완벽|감탄|전반적으로|무엇보다|가장 (큰|마음에|만족)|활용도|부담 없이|합리적|알차|제격|강력 ?추천|적극 ?추천|한 번쯤|몬스터급|압도적|든든)/g)||[]).length;
+  sc-= ph>=5?2:ph>=3?1:0;
+  const emo=(t.match(/[\p{Extended_Pictographic}✔✅☑★●■▶◆⚡✨]/gu)||[]).length; if(emo>=3)sc-=2;else if(emo>=1)sc-=1;
+  if(L>=900&&lines.length<=8)sc-=1;
+  if(L<120&&nar<2)sc-=2;
   return sc;
 }
-function aiLevel(r){
-  if(AI_OVERRIDE[r.id]) return AI_OVERRIDE[r.id];
-  const sc=r.sc!=null?r.sc:aiScore(r);
-  return sc>=5?'full':sc>=2?'part':'none';
+function gradeFromMean(m){return m>=11?1:m>=8?2:m>=5?3:m>=2?4:5}
+/* 같은 닉네임은 같은 등급 (닉네임이 쓴 리뷰들의 평균 기준) */
+const _gc={};
+function gradeOf(r){
+  const n=r.n;if(n in GRADE_OVERRIDE)return GRADE_OVERRIDE[n];
+  if(!(n in _gc)){const mine=R.filter(x=>x.n===n);_gc[n]=gradeFromMean(mine.reduce((a,x)=>a+x.sc,0)/mine.length)}
+  return _gc[n];
 }
 
-/* 리뷰온도: 전원 표시. 같은 닉네임은 같은 값. AI스러운 글을 쓸수록 낮고, 직접 쓴 글은 높게 (시뮬레이션) */
-function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)}
-const _tc={};
-function tempOf(r){
-  const n=r.n;if(n in TEMP_OVERRIDE)return TEMP_OVERRIDE[n];
-  if(!(n in _tc)){
-    const mine=R.filter(x=>x.n===n),m=mine.reduce((a,x)=>a+x.sc,0)/mine.length;
-    const hv=hashStr(PRODUCT+'|'+n),jit=(hv%13)-6;
-    let t=m>=0?88-6.5*m:88+Math.min(-m,3);
-    t+=jit;
-    const hmax=Math.max(...mine.map(x=>x.h||0));if(hmax>=10)t+=3;
-    _tc[n]=Math.max(18,Math.min(97,Math.round(t)));
-  }
-  return _tc[n];
-}
-function tempTier(p){return p>=75?'t3':p>=50?'t2':'t1'}
+R.forEach(r=>{tagReview(r);r.sc=expScore(r)});R.forEach(r=>{r.g=gradeOf(r)});
 
-R.forEach(r=>{tagReview(r);r.sc=aiScore(r)});R.forEach(r=>{r.ai=aiLevel(r)});R.forEach(r=>{r.tp=tempOf(r)});
-
-const AI_LAB={full:['AI 작성','ai-f'],part:['AI 도움','ai-p'],none:['직접 작성','ai-n']};
 const SPARK='<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>';
-function aiPill(r){const [t,c]=AI_LAB[r.ai];return `<button class="aip2 ${c}" data-a="ailab" data-v="${r.id}" aria-label="AI 사용 여부: ${t}">${r.ai==='none'?'<span class="tw" aria-hidden="true">✦</span>':r.ai==='part'?SPARK:''}${t}</button>`}
-function tempHTML(r){return r.tp==null?'':`<button class="tmp ${tempTier(r.tp)}" data-a="temp" data-v="${r.id}" aria-label="리뷰온도 ${r.tp}%"><i>리뷰온도</i>${r.tp}%</button>`}
+const GR_NAME={1:'금색',2:'실버',3:'파랑',4:'노랑',5:'회색'};
+function gradeHTML(r){return `<button class="gr g${r.g}" data-a="grade" data-v="${r.id}" aria-label="경험 리뷰어 ${r.g}등급"><i>경험 리뷰어</i>${r.g}</button>`}
 const CHIP_N={};R.forEach(r=>r.t.forEach(t=>CHIP_N[t]=(CHIP_N[t]||0)+1));
 const CHIPS=CHIP_SPECS.filter(s=>(CHIP_N[s.id]||0)>=3);
 function hitHTML(r,where){
@@ -681,11 +663,6 @@ function hitHTML(r,where){
   else if(sp.h)body='구매자 입력 정보: <mark>키 '+r_height(r)+'cm</mark>'+(r.o['평소 사이즈']?' · 평소 사이즈 '+r.o['평소 사이즈']:'')+(r.o['사이즈']?' · '+r.o['사이즈']:'');
   else{const k=(sp.o||sp.ob)[0];body='구매자 입력 정보: <mark>'+k+' '+r.o[k]+'</mark>'}
   return `<div class="hit"><b>${SPARK} AI 맞춤 근거</b>${body}</div>`;
-}
-function renderAIBars(){
-  const f=R.filter(r=>r.ai==='full').length,p=R.filter(r=>r.ai==='part').length;
-  const h=`<div class="aibar"><span class="aic" aria-hidden="true">AI</span><div><b>AI로 작성된 리뷰 숨기기</b><small>${st.hideAI?`AI 작성 리뷰 ${f}개를 숨겼어요`:`AI 작성 ${f}개, AI 도움 ${p}개`}</small></div><button class="sw ${st.hideAI?'on':''}" role="switch" aria-checked="${st.hideAI}" aria-label="AI로 작성된 리뷰 숨기기" data-a="aitog"><i></i></button></div>`;
-  document.querySelectorAll('.aibar-host').forEach(e=>e.innerHTML=h);
 }
 function renderChips(){
   const ck='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6a35cf" stroke-width="2.6"><path d="m4.5 12.5 4.5 4.5L19.5 6.5"/></svg>';
@@ -702,12 +679,9 @@ function renderFz(n){
   $('#fpho').classList.toggle('on',st.photo);
 }
 
-function aiSheet(r){
-  const m={full:['AI로 작성된 리뷰로 분석됐어요','글의 구성과 표현을 분석했을 때 대부분 AI 도구로 작성된 것으로 보여요.'],part:['AI의 도움을 받은 리뷰로 분석됐어요','작성자가 직접 쓴 내용에 AI 도구의 도움을 일부 받은 것으로 보여요.'],none:['직접 작성한 리뷰로 분석됐어요','AI 도구를 사용한 흔적이 거의 발견되지 않았어요.']}[r.ai];
-  sheet(`<h3>${m[0]}</h3><p>${m[1]}</p><p class="sm">AI 사용 여부는 자동 분석 결과이며 실제와 다를 수 있어요. 목록 위의 ‘AI로 작성된 리뷰 숨기기’로 AI 작성 리뷰를 미리 숨길 수 있어요.</p><div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
-}
-function tempSheet(r){
-  sheet(`<h3>리뷰온도</h3><div class="tbig">${r.tp}%</div><p><b>${r.n}</b>님의 리뷰온도예요.</p><p class="sm">이 리뷰어의 리뷰를 읽고 실제로 구매한 사람들이 ‘도움이 됐다’고 평가한 비율이에요. 신뢰할 수 있는 리뷰를 자주 남길수록 올라가요.</p><p class="sm">리뷰를 보고 구매한 뒤 도움이 됐다고 남긴 평가만 반영돼요.</p><div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
+function gradeSheet(r){
+  const lg=[1,2,3,4,5].map(g=>`<span class="gr g${g} ${g===r.g?'me':''}"><i>경험 리뷰어</i>${g}</span>`).join('');
+  sheet(`<h3>경험 리뷰어 ${r.g}등급</h3><div class="glg">${lg}</div><p><b>${r.n}</b>님의 등급이에요. 1등급(금색)에 가까울수록 자신의 경험을 풍부하게 서술하는 리뷰어예요.</p><p class="sm">상품 정보나 장점을 나열하는 대신, <b>자신이 어떤 사람인지</b>, <b>어떤 상황에서 잘 맞았는지</b>, <b>어떤 사람에게 추천하는지</b>를 구체적으로 적은 리뷰를 쓸수록 등급이 높아져요.</p><p class="sm">1등급 금색 · 2등급 실버 · 3등급 파랑 · 4등급 노랑 · 5등급 회색</p><div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
 }
 function renderSummary(){
   $('#sum').className='sum';
@@ -726,7 +700,7 @@ function newLog(pid){LOG={pid,condition:CONDITION,product:PRODUCT,started_at:new
 const now=()=>+((performance.now()-t0)/1000).toFixed(2);
 function log(type,data={}){if(!LOG)return;const ev={t:now(),type,...data};LOG.events.push(ev);LAB.event(ev);persist()}
 function persist(){try{localStorage.setItem('proto_log_'+LOG.pid+'_'+LOG.started_at,JSON.stringify(LOG))}catch(e){}}
-function summary(){const s=summary_(),ev=LOG.events,c=a=>ev.filter(e=>e.type===a).length;return {...s,detail_expand_clicks:c('detail_expand'),ai_toggle_clicks:c('ai_toggle'),ai_hidden_at_end:st.hideAI?1:0,chip_clicks:ev.filter(e=>e.type==='chip'&&e.on).length,chip_clicks_from_product:ev.filter(e=>e.type==='chip'&&e.place==='product').length,chips_used:[...new Set(ev.filter(e=>e.type==='chip'&&e.on).map(e=>e.label))].join('|'),temp_taps:c('temp_tap'),ai_label_taps:c('ai_label_tap')}}
+function summary(){const s=summary_(),ev=LOG.events,c=a=>ev.filter(e=>e.type===a).length;return {...s,detail_expand_clicks:c('detail_expand'),chip_clicks:ev.filter(e=>e.type==='chip'&&e.on).length,chip_clicks_from_product:ev.filter(e=>e.type==='chip'&&e.place==='product').length,chips_used:[...new Set(ev.filter(e=>e.type==='chip'&&e.on).map(e=>e.label))].join('|'),grade_taps:c('grade_tap'),exp_sort_clicks:ev.filter(e=>e.type==='sort'&&e.v==='exp').length}}
 function summary_(){
   flushVis();
   const ev=LOG.events,cnt=a=>ev.filter(e=>e.type===a).length;
@@ -755,7 +729,7 @@ function flushVis(){const n=performance.now();for(const id in curVis){seen[id]=(
 /* ================= 공통 ================= */
 const $=s=>document.querySelector(s);
 let st,view='product',prodY=0;
-function init(){st={hideAI:false,chip:'',cat:'',sort:'best',photo:true,star:0,page:1,open:new Set(),vote:{},down:{},sumOpen:false,bars:false,sdist:false,opt:0,size:''}}
+function init(){st={chip:'',cat:'',sort:'best',photo:true,star:0,page:1,open:new Set(),vote:{},down:{},sumOpen:false,bars:false,sdist:false,opt:0,size:''}}
 init();
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.k);toast.k=setTimeout(()=>t.hidden=true,2200)}
 function sheet(h){const d=$('#sheet');d.innerHTML=h;if(!d.open)d.showModal()}
@@ -796,24 +770,24 @@ function renderGrids(){
   $('#grid4').innerHTML=['rv_t1','rv_t2','rv_t3','rv_t8'].map((n,i)=>`<button data-a="toast" data-v="${i===3?'리뷰 사진 전체보기는 제공되지 않습니다.':'리뷰 사진 확대는 제공되지 않습니다.'}" aria-label="${i===3?'리뷰 사진 857장 더보기':'리뷰 사진 '+(i+1)}"><img src="${img(n)}" alt=""></button>`).join('');
 }
 function sorted(list){
-  if(st.sort!=='best')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
-  /* 베스트순: 별점과 '도움이 돼요' 수를 함께 반영 (별점 + 0.9 x log2(1+도움 수)). 같으면 원래 순서 */
+  if(st.sort==='new')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
+  /* 베스트순: 별점과 '도움이 돼요' 수를 함께 반영 (별점 + 0.9 x log2(1+도움 수)). 같으면 원래 순서
+     경험 리뷰어 등급순: 등급(1등급 먼저) 다음 베스트순 */
   const sc=r=>r.s+0.9*Math.log2(1+(r.h||0));
-  return list.slice().sort((a,b)=>(sc(b)-sc(a))||(a.id-b.id));
+  return list.slice().sort((a,b)=>(st.sort==='exp'?(a.g-b.g):0)||(sc(b)-sc(a))||(a.id-b.id));
 }
 function renderProductReviews(){
-  renderAIBars();
-  const l=sorted(R.filter(r=>r.ph.length&&!(st.hideAI&&r.ai==='full'))).slice(0,PROD_N);
+  const l=sorted(R.filter(r=>r.ph.length)).slice(0,PROD_N);
   $('#plist').innerHTML=l.map(r=>card(r,'p')).join('');
   observeCards('#plist');
 }
 
 /* ================= 리뷰 전체 화면 ================= */
-function filtered(){return sorted(R.filter(r=>(!st.cat||r.c.includes(st.cat))&&(!st.chip||r.t.includes(st.chip))&&!(st.hideAI&&r.ai==='full')&&(!st.photo||r.ph.length||r.np)&&(!st.star||r.s===st.star)))}
+function filtered(){return sorted(R.filter(r=>(!st.cat||r.c.includes(st.cat))&&(!st.chip||r.t.includes(st.chip))&&(!st.photo||r.ph.length||r.np)&&(!st.star||r.s===st.star)))}
 function renderReviews(){
-  $('#s1').className=st.sort==='best'?'on':'';$('#s2').className=st.sort==='new'?'on':'';
+  $('#sx').className=st.sort==='exp'?'on':'';$('#sx').setAttribute('aria-pressed',st.sort==='exp');$('#s1').className=st.sort==='best'?'on':'';$('#s2').className=st.sort==='new'?'on':'';
   const ck='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3d8a25" stroke-width="2"><path d="m4.5 12.5 4.5 4.5L19.5 6.5"/></svg>';
-  renderChips();renderAIBars();
+  renderChips();
     const all=filtered(),l=all.slice(0,st.page*PAGE_N);
   $('#list').innerHTML=l.length?l.map(r=>card(r,'r')).join(''):'<div class="empty">조건에 맞는 리뷰가 없습니다.</div>';
   $('#list').dataset.more=all.length>l.length?'1':'';renderFz(all.length);
@@ -826,7 +800,7 @@ new IntersectionObserver(es=>{if(es[0].isIntersecting&&view==='reviews'&&$('#lis
 function card(r,where){
   const v=st.vote[r.id],o=st.open.has(r.id),ot=Object.entries(r.o);
   const help=r.h+(v?1:0);
-  return `<article class="card" data-rid="${r.id}"><div class="who">${where==='r'?`<div class="av" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21.5c0-4.7 3.8-7.3 8.5-7.3s8.5 2.6 8.5 7.3z"/></svg></div>`:''}<div><div class="n">${r.n}${r.ex?'<span class="exb">쿠팡체험단</span>':''}${tempHTML(r)}</div><div class="sd"><span class="stars" style="--s:17px"><span hidden></span>${starsHTML(r.s)}</span><span class="d">${r.d}</span>${aiPill(r)}</div><div class="sel">판매자: ${r.sl||'주식회사 차쿠'}</div></div></div>
+  return `<article class="card" data-rid="${r.id}"><div class="who">${where==='r'?`<div class="av" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21.5c0-4.7 3.8-7.3 8.5-7.3s8.5 2.6 8.5 7.3z"/></svg></div>`:''}<div><div class="n">${r.n}${r.ex?'<span class="exb">쿠팡체험단</span>':''}${gradeHTML(r)}</div><div class="sd"><span class="stars" style="--s:17px"><span hidden></span>${starsHTML(r.s)}</span><span class="d">${r.d}</span></div><div class="sel">판매자: ${r.sl||'주식회사 차쿠'}</div></div></div>
   <div class="plink">${r.pl||'차쿠 1+1(2세트) 남여공용 트레이닝복팬츠 조거팬츠 일자 와이드 추리닝 슬랙스팬츠 작업바지 편의점바지 빅사이즈'}</div>
   ${r.ph.length?`<div class="ph">${r.ph.map((p,k)=>k===0&&r.vid?`<span class="vd"><img src="${img('rv_'+p)}" alt="" loading="lazy"><u></u><i>${r.vid}</i></span>`:`<img src="${img('rv_'+p)}" alt="" loading="lazy">`).join('')}</div>`:''}
   ${r.hd?`<div class="hd">${r.hd}</div>`:''}${hitHTML(r,where)}<p class="bd ${o?'open':''}">${r.b}</p>${r.b.length>110?`<button class="more" data-a="open" data-v="${r.id}" aria-expanded="${o}">${o?'접기':'더보기'}</button>`:''}
@@ -875,14 +849,12 @@ document.addEventListener('click',e=>{
   else if(a==='bars'){st.bars=!st.bars;$('#bars').hidden=!st.bars;t.firstChild.textContent=st.bars?'접기 ':'자세히보기 ';t.querySelector('path').setAttribute('d',st.bars?'m5 15 7-7 7 7':'m5 9 7 7 7-7');t.setAttribute('aria-expanded',st.bars);log('size_color_detail',{open:st.bars})}
   else if(a==='sdist'){st.sdist=!st.sdist;$('#sdist').hidden=!st.sdist;t.querySelector('path').setAttribute('d',st.sdist?'m5 15 7-7 7 7':'m5 9 7 7 7-7');t.setAttribute('aria-expanded',st.sdist);log('star_dist',{open:st.sdist})}
   else if(a==='dmore'){const w=$('#dwrap'),on=!w.classList.contains('open');w.classList.toggle('open',on);t.firstChild.textContent=on?'상품정보 접기 ':'상품정보 더보기 ';t.querySelector('path').setAttribute('d',on?'m5 15 7-7 7 7':'m5 9 7 7 7-7');if(!on)$('#detail').scrollIntoView();log(on?'detail_expand':'detail_collapse')}
-  else if(a==='aitog'){st.hideAI=!st.hideAI;st.page=1;renderProductReviews();renderReviews();log('ai_toggle',{hide:st.hideAI})}
   else if(a==='chip'){st.chip=(v===st.chip)?'':v;st.page=1;renderReviews();const sp=CHIPS.find(s=>s.id===v);log('chip',{v:v||'전체',label:sp?sp.label:'전체',on:!!st.chip,place:'review'})}
   else if(a==='chipgo'){st.chip=v;st.page=1;renderReviews();show('reviews');const sp=CHIPS.find(s=>s.id===v);log('chip',{v,label:sp?sp.label:'',on:true,place:'product'});setTimeout(()=>$('#cats').scrollIntoView({block:'center'}),0)}
-  else if(a==='temp'){const r=R[+v];tempSheet(r);log('temp_tap',{review:r.n,id:r.id,temp:r.tp})}
-  else if(a==='ailab'){const r=R[+v];aiSheet(r);log('ai_label_tap',{review:r.n,id:r.id,level:r.ai})}
+  else if(a==='grade'){const r=R[+v];gradeSheet(r);log('grade_tap',{review:r.n,id:r.id,grade:r.g})}
   else if(a==='sclose')closeSheet();
   else if(a==='cat'){st.cat=v;st.page=1;renderReviews();log('category',{v:v||'전체'})}
-  else if(a==='sort'){st.sort=v;st.page=1;renderReviews();log('sort',{v})}
+  else if(a==='sort'){st.sort=(v==='exp'&&st.sort==='exp')?'best':v;st.page=1;renderReviews();log('sort',{v})}
   else if(a==='open'){const id=+v;const was=st.open.has(id);was?st.open.delete(id):st.open.add(id);view==='reviews'?renderReviews():renderProductReviews();if(!was)log('open_review',{review:R[id].n,id})}
   else if(a==='down'){const id=+v;st.down[id]=!st.down[id];if(st.down[id])st.vote[id]=false;view==='reviews'?renderReviews():renderProductReviews();log('unhelpful',{review:R[id].n,id,on:st.down[id]})}
   else if(a==='vote'){const id=+v;st.vote[id]=!st.vote[id];if(st.vote[id])st.down[id]=false;view==='reviews'?renderReviews():renderProductReviews();log('helpful',{review:R[id].n,id,on:st.vote[id]})}

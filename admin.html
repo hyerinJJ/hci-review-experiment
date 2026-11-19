@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>실험 관리자</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="config.js?v=8"></script>
-<script src="lab.js?v=8"></script>
+<script src="config.js?v=9"></script>
+<script src="lab.js?v=9"></script>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--tx:#111827;--tx2:#5b6472;--tx3:#8b93a1;--ln:#e3e7ed;--pri:#4168f6;--pri-bg:#edf1ff;--ok:#1f8a4c;--ok-bg:#e7f6ec;--wa:#a15c00;--wa-bg:#fff3e0;--ai:#5a2bbf;--ai-bg:#f2edff;color-scheme:light}
 *{box-sizing:border-box}
@@ -145,7 +145,7 @@ function renderAll(){
   const pids=[...new Set(SESS.map(r=>r.pid))].sort();const fp=$('#fp'),cur=fp.value;
   fp.innerHTML='<option value="">참여자 전체</option>'+pids.map(p=>`<option ${p===cur?'selected':''}>${p}</option>`).join('');
   const v=visible();
-  const cols=[['pid','참여자'],['product','상품'],['condition','조건'],['status','상태'],['choice','선택'],['decision_time_s','결정(초)',1],['reviews_expanded','펼친 리뷰',1],['reviews_viewed_1s','본 리뷰',1],['ai_toggle_clicks','AI 숨기기',1],['chip_clicks','선택칩',1],['temp_taps','온도',1],['filter_used','별점필터',1],['q1','Q1',1],['q2','Q2',1],['q3','Q3',1],['q4','Q4',1],['updated_at','갱신']];
+  const cols=[['pid','참여자'],['product','상품'],['condition','조건'],['status','상태'],['choice','선택'],['decision_time_s','결정(초)',1],['reviews_expanded','펼친 리뷰',1],['reviews_viewed_1s','본 리뷰',1],['exp_sort_clicks','등급순',1],['chip_clicks','선택칩',1],['grade_taps','등급 탭',1],['filter_used','별점필터',1],['q1','Q1',1],['q2','Q2',1],['q3','Q3',1],['q4','Q4',1],['updated_at','갱신']];
   $('#tbl').innerHTML=v.length?'<tr>'+cols.map(c=>`<th>${c[1]}</th>`).join('')+'<th></th></tr>'+v.map(r=>`<tr class="click ${r.sid===sel?'sel':''}" data-sid="${r.sid}">${cols.map(([k,,n])=>`<td class="${n?'n':''}">${k==='status'?badge(r[k]):k==='condition'?`<span class="badge ${r[k]==='P1'?'p1':''}">${r[k]}</span>`:k==='updated_at'?fmt(r[k]):(r[k]??'')}</td>`).join('')}<td><button class="b sm" data-hide="${r.sid}" title="파일럿이나 테스트 기록을 분석에서 제외">${r.status==='제외'?'제외됨':'제외'}</button></td></tr>`).join(''):`<tr><td class="empty">${LAB.gasUrl()?'아직 기록이 없어요':'저장 주소를 설정하면 기록이 보여요'}</td></tr>`;
   renderLinks();
 }
