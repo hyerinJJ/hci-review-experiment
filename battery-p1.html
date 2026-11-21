@@ -621,7 +621,7 @@ function newLog(pid){LOG={pid,condition:CONDITION,product:PRODUCT,started_at:new
 const now=()=>+((performance.now()-t0)/1000).toFixed(2);
 function log(type,data={}){if(!LOG)return;const ev={t:now(),type,...data};LOG.events.push(ev);LAB.event(ev);persist()}
 function persist(){try{localStorage.setItem('proto_log_'+LOG.pid+'_'+LOG.started_at,JSON.stringify(LOG))}catch(e){}}
-function summary(){const s=summary_(),ev=LOG.events,c=a=>ev.filter(e=>e.type===a).length;return {...s,detail_expand_clicks:c('detail_expand'),chip_clicks:ev.filter(e=>e.type==='chip'&&e.on).length,chip_clicks_from_product:ev.filter(e=>e.type==='chip'&&e.place==='product').length,chips_used:[...new Set(ev.filter(e=>e.type==='chip'&&e.on).map(e=>e.label))].join('|'),grade_taps:c('grade_tap'),exp_sort_clicks:ev.filter(e=>e.type==='sort'&&e.v==='exp').length}}
+function summary(){const s=summary_(),ev=LOG.events,c=a=>ev.filter(e=>e.type===a).length;return {...s,detail_expand_clicks:c('detail_expand'),chip_clicks:ev.filter(e=>e.type==='chip'&&e.on).length,chip_clicks_from_product:ev.filter(e=>e.type==='chip'&&e.place==='product').length,chips_used:[...new Set(ev.filter(e=>e.type==='chip'&&e.on).map(e=>e.label))].join('|'),grade_taps:c('grade_tap'),grade_info_clicks:c('grade_info'),chip_info_clicks:c('chip_info'),chip_clicks_from_card:ev.filter(e=>e.type==='chip'&&e.place==='card').length,exp_sort_clicks:ev.filter(e=>e.type==='sort'&&e.v==='exp').length}}
 function summary_(){
   flushVis();
   const ev=LOG.events,cnt=a=>ev.filter(e=>e.type===a).length;
