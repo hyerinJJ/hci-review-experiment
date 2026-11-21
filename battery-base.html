@@ -21,7 +21,7 @@ svg{display:block}
 
 .page{max-width:480px;margin:0 auto;background:var(--bg);min-height:100vh;padding-top:var(--study)}
 #v-product{padding-bottom:150px}
-#v-reviews{padding-top:calc(var(--study) + 52px);padding-bottom:80px}
+#v-reviews{padding-top:calc(var(--study) + 44px);padding-bottom:80px}
 
 /* 상품 화면 상단 검색바 (스크롤 시) */
 .top{position:fixed;top:var(--study);left:50%;transform:translate(-50%,-160%);width:100%;max-width:480px;z-index:20;background:var(--bg);display:flex;align-items:center;gap:6px;padding:8px 14px 8px 6px}
@@ -145,9 +145,9 @@ svg{display:block}
 .sim{padding:16px;font-size:17px;font-weight:700}
 
 /* 리뷰 전체 화면 */
-.rhead{position:fixed;top:var(--study);left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:52px;z-index:20;background:#fff;display:flex;align-items:center;padding:0 14px 0 6px}
-.rhead h1{margin:0 0 0 4px;font-size:20px;font-weight:800;letter-spacing:-.02em}
-.rhead .pol{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:15px;color:#7a7f87}
+.rhead{position:fixed;top:var(--study);left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:44px;z-index:20;background:#fff;display:flex;align-items:center;padding:0 12px 0 4px}
+.rhead h1{margin:0 0 0 2px;font-size:16px;font-weight:800;letter-spacing:-.02em}
+.rhead .pol{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:13px;color:#7a7f87}
 .rate2{display:flex;align-items:center;gap:12px;padding:6px 16px 0}
 .rate2 b{font-size:21px;font-weight:400}
 .lk2{margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--pri);font-size:15px;min-height:40px}
@@ -237,7 +237,7 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .fr .l{flex:1}.fr .c{min-width:56px;text-align:right;color:#888}
 .fr.on .l,.fr.on .c{color:var(--pri)}
 .fr .ss{display:flex;gap:1px}
-.hsat{margin-left:auto;display:flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:17px;background:#f1f4f6;font-size:15px;font-weight:800}
+.hsat{margin-left:auto;display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:13px;background:#f1f4f6;font-size:12px;font-weight:700}
 #toast{position:fixed;left:50%;bottom:180px;transform:translateX(-50%);max-width:90%;padding:10px 16px;border-radius:20px;background:#222;color:#fff;font-size:14px;z-index:60;text-align:center}
 
 .spec{margin-top:12px;font-size:14px;color:var(--tx2);line-height:1.6}.spec i{display:inline-block;width:1px;height:11px;background:#ccc;margin:0 6px;vertical-align:middle}
@@ -306,7 +306,7 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 </div>
 
 <!-- ===== 리뷰 전체 ===== -->
-<div class="rhead" id="rhead" hidden><button class="back" data-a="back" aria-label="뒤로 가기"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3 6 12l9 9"/></svg></button><h1>상품 리뷰</h1><span class="hsat" id="hsat" hidden><span aria-hidden="true">🙂</span>5,000명 이상 만족</span><button class="pol" id="pol" data-a="toast" data-v="운영정책은 프로토타입에서 제공되지 않습니다.">운영정책 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div>
+<div class="rhead" id="rhead" hidden><button class="back" data-a="back" aria-label="뒤로 가기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3 6 12l9 9"/></svg></button><h1>상품 리뷰</h1><span class="hsat" id="hsat" hidden><span aria-hidden="true">🙂</span>5,000명 이상 만족</span><button class="pol" id="pol" data-a="toast" data-v="운영정책은 프로토타입에서 제공되지 않습니다.">운영정책 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div>
 <div class="page" id="v-reviews" hidden>
   <div class="rate2"><span class="stars" data-stars="5"></span><b>5,866</b><button class="lk2" data-a="sdist" aria-expanded="false" id="sdbtn">자세히보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 9 7 7 7-7"/></svg></button></div>
   <div class="sdist bars" id="sdist" hidden style="margin-top:6px"><div class="br"><span>최고</span><u><b style="width:88%;background:#f6a05c"></b></u><em>88%</em></div><div class="br"><span>좋음</span><u><b style="width:7%;background:#f6a05c"></b></u><em>7%</em></div><div class="br"><span>보통</span><u><b style="width:2%;background:#f6a05c"></b></u><em>2%</em></div><div class="br"><span>별로</span><u><b style="width:1%;background:#f6a05c"></b></u><em>1%</em></div><div class="br"><span>나쁨</span><u><b style="width:2%;background:#f6a05c"></b></u><em>2%</em></div></div>
@@ -565,7 +565,7 @@ document.addEventListener('click',e=>{
 $('#pho').addEventListener('change',e=>{st.photo=e.target.checked;st.page=1;renderReviews();log('photo_toggle',{on:st.photo})});
 $('#sheet').addEventListener('cancel',e=>{if(!LOG)e.preventDefault()});
 
-new IntersectionObserver(es=>{const off=!es[0].isIntersecting&&view==='reviews';$('#hsat').hidden=!off;$('#pol').hidden=off},{rootMargin:'-92px 0px 0px 0px'}).observe(document.querySelector('.sat'));
+new IntersectionObserver(es=>{const off=!es[0].isIntersecting&&view==='reviews';$('#hsat').hidden=!off;$('#pol').hidden=off},{rootMargin:'-84px 0px 0px 0px'}).observe(document.querySelector('.sat'));
 function renderAll(){renderOpts();renderGrids();renderSummary();renderProductReviews();renderReviews();$('#bars').hidden=true;$('#sdist').hidden=true}
 document.querySelectorAll('img[data-img]').forEach(i=>i.src=img(i.dataset.img));
 $('#imgs').innerHTML=DETAIL_H.map((h,i)=>`<img loading="lazy" src="${img('detail_'+String(i+1).padStart(2,'0'))}" alt="상세 이미지 ${i+1}/${DETAIL_H.length}" width="${DETAIL_W}" height="${h}">`).join('');

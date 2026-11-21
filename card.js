@@ -39,8 +39,8 @@
   .ccard .cc-h small em{font-style:normal;font-weight:700;color:#333}
   .ccard .cc-x{flex:none;width:28px;height:28px;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cats{gap:6px;padding:10px 14px 0}
-  .ccard .chip{height:32px;padding:0 11px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:13px;font-weight:400;color:#333;gap:4px}
-  .ccard .chip small{font-size:12px;font-weight:400;color:#9a9fa7}`;
+  .ccard .chip{height:30px;padding:0 10px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:12px;font-weight:400;color:#333;gap:4px}
+  .ccard .chip small{font-size:11px;font-weight:400;color:#9a9fa7}`;
   document.head.appendChild(css);
 
   /* 위쪽 AI 맞춤 선택칩 줄을 그대로 다시 보여준다 (순서도 동일) */
