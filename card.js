@@ -32,28 +32,21 @@
   const css=document.createElement('style');
   css.textContent=`
   .ccard{margin:14px 16px;padding:14px 0 14px;border:1px solid #e3e6ea;border-radius:12px;background:#fafbfc;overflow:hidden}
-  .ccard .cc-h{display:flex;align-items:center;gap:8px;padding:0 10px 0 14px}
+  .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
   .ccard .cc-h b{flex:1;font-size:15.5px}
-  .ccard .cc-h small{margin-left:6px;font-weight:400;font-size:12.5px;color:#7a7f88}
+  .ccard .cc-h small{display:flex;align-items:center;gap:4px;margin-top:3px;font-weight:400;font-size:13px;color:#5a6070}
+  .ccard .cc-h small svg{width:12px;height:12px;flex:none}
   .ccard .cc-x{flex:none;width:28px;height:28px;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cats{gap:8px;padding:10px 14px 0}
   .ccard .chip{height:36px;padding:0 14px;border:1px solid #dfe3e8;border-radius:18px;font-size:14.5px;font-weight:600;color:#333;gap:5px}
   .ccard .chip small{font-size:12.5px;font-weight:700;color:#8a8f98}`;
   document.head.appendChild(css);
 
-  /* AI 맞춤 선택칩 전체를 넣되, 사용자가 오래 본 리뷰의 주제와 구매 걱정 항목이 앞에 오도록 정렬 */
-  function pickChips(){
-    if(typeof flushVis==='function')flushVis();
-    const dwell={};
-    for(const id in seen){const r=R[+id];if(!r)continue;for(const t of r.t)dwell[t]=(dwell[t]||0)+seen[id]}
-    const L=plan.cand.length;
-    return CHIPS.map((sp,k)=>{const i=plan.cand.indexOf(sp.id);
-      return {sp,score:(dwell[sp.id]||0)/1000+(CHIP_N[sp.id]||0)*0.05+(i<0?0:(L-i)*0.3)-k*0.001}})
-      .sort((a,b)=>b.score-a.score).map(x=>x.sp);
-  }
+  /* 위쪽 AI 맞춤 선택칩 줄을 그대로 다시 보여준다 (순서도 동일) */
+  function pickChips(){return CHIPS.slice()}
   function cardHTML(){
-    return `<div class="ccard" id="ccard" role="region" aria-label="AI 맞춤 선택칩 추천">
-      <div class="cc-h"><b>찾는 내용이 있으세요?<small>보신 후기 기준 추천</small></b>
+    return `<div class="ccard" id="ccard" role="region" aria-label="AI 맞춤 선택칩 안내">
+      <div class="cc-h"><b>찾는 내용이 있으세요?<small>${typeof SPARK!=='undefined'?SPARK:''}AI 맞춤 선택칩으로 원하는 후기만 모아 볼 수 있어요</small></b>
       <button class="cc-x" data-cc="close" aria-label="닫기">×</button></div>
       <div class="cats">${shownChips.map(s=>`<button class="chip" data-cc="chip" data-v="${s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('')}</div>
     </div>`;
