@@ -119,23 +119,23 @@ svg{display:block}
 .card+.card{border-top:1px solid #eef0f2}
 .who{display:flex;gap:12px;align-items:center}
 .av{width:45px;height:45px;border-radius:50%;background:#e3e6ea;display:grid;place-items:center;color:#a2a9b3;overflow:hidden;flex:none}
-.who .n{font-size:14px}
+.who .n{font-size:15px}
 .who .sd{display:flex;align-items:center;gap:8px;margin-top:2px}
-.who .d{color:var(--tx3);font-size:13px}
-.who .sel{color:var(--tx3);font-size:13px;margin-top:2px}
-.plink{margin:16px 0 12px;color:#4a73f0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who .d{color:var(--tx3);font-size:12px}
+.who .sel{color:var(--tx3);font-size:12px;margin-top:2px}
+.plink{margin:16px 0 12px;color:#4a73f0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ph{display:flex;gap:2px;overflow-x:auto;margin:0 -16px;padding:0 16px;scrollbar-width:none}
 .ph::-webkit-scrollbar{display:none}
 .ph img{flex:none;height:80px;width:80px;object-fit:cover;border-radius:4px}
-.hd{font-weight:700;font-size:14px;margin:14px 0 6px}
-.bd{margin:0;font-size:13.5px;line-height:1.6;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;color:#222}
+.hd{font-weight:700;font-size:12px;margin:14px 0 4px}
+.bd{margin:0;font-size:12px;line-height:1.5;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;color:#222}
 .bd.open{display:block}
-.more{color:#4a73f0;font-size:13.5px;min-height:34px}
-.ot{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:10px 0 4px;font-size:13px}
+.more{color:#4a73f0;font-size:12px;min-height:32px}
+.ot{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:10px 0 4px;font-size:12px}
 .ot dt{font-weight:700;color:#333}.ot dd{margin:0;color:#333}
-.hc{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:#222;min-height:30px}.hc b{font-weight:700}.hc .rp{color:#222;font-size:13px;min-height:32px;padding:0}
+.hc{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:#222;min-height:30px}.hc b{font-weight:700}.hc .rp{color:#222;font-size:12px;min-height:32px;padding:0}
 .ac{display:flex;gap:8px;margin-top:8px}
-.ac .hp,.ac .dn{flex:1;display:flex;align-items:center;justify-content:center;height:36px;border:1.5px solid #333;border-radius:4px;font-size:14px;color:#333;background:#fff}
+.ac .hp,.ac .dn{flex:1;display:flex;align-items:center;justify-content:center;height:36px;border:1.5px solid #333;border-radius:4px;font-size:13px;color:#333;background:#fff}
 .ac .dn{border-color:var(--pri);color:var(--pri)}
 .ac .hp.on{border-color:var(--pri);color:var(--pri);background:var(--pri-bg);font-weight:700}.ac .dn.on{background:var(--pri-bg);font-weight:700}
 .btn2{display:flex;align-items:center;justify-content:center;gap:2px;width:calc(100% - 32px);margin:8px 16px 16px;min-height:48px;border:1px solid #d3d8de;border-radius:4px;font-weight:700;font-size:15px}
@@ -292,7 +292,7 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .pch.col{max-height:88px;overflow:hidden}
 .pch .chip{height:32px;padding:0 11px;border:1px solid #dcdfe3;border-radius:6px;font-size:13px;font-weight:400;color:#333;gap:4px}
 .pch .chip small{font-size:12px;color:#9a9fa7;font-weight:400}
-.hit{margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#eef3ff;font-size:13px;line-height:1.55;color:#333}
+.hit{margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#eef3ff;font-size:12px;line-height:1.5;color:#333}
 .hit b{display:flex;align-items:center;gap:3px;font-size:12px;color:#2f6bff;margin-bottom:2px}
 .hit mark{background:#d6e2ff;color:inherit;border-radius:2px;padding:0 1px}
 dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
@@ -570,10 +570,11 @@ function hitHTML(r,where){
   const sp=CHIPS.find(s=>s.id===st.chip);if(!sp)return '';
   const h=chipHit(r,sp);if(h===null)return '';
   let body;
+  let ttl='이 후기 속 ‘'+sp.label+'’ 이야기';
   if(h){const re=sp.re?RX(sp.re):null;body='“'+(re?h.replace(new RegExp(re.source,'gi'),m=>'<mark>'+m+'</mark>'):h)+'”'}
-  else if(sp.h)body='구매자 입력 정보: <mark>키 '+r_height(r)+'cm</mark>'+(r.o['평소 사이즈']?' · 평소 사이즈 '+r.o['평소 사이즈']:'')+(r.o['사이즈']?' · '+r.o['사이즈']:'');
-  else{const k=(sp.o||sp.ob)[0];body='구매자 입력 정보: <mark>'+k+' '+r.o[k]+'</mark>'}
-  return `<div class="hit"><b>${SPARK} AI 맞춤 근거</b>${body}</div>`;
+  else if(sp.h){ttl='작성자는 이런 체형이에요';body='<mark>키 '+r_height(r)+'cm</mark>'+(r.o['평소 사이즈']?' · 평소 '+r.o['평소 사이즈']+' 사이즈':'')+(r.o['사이즈']?' · '+r.o['사이즈']:'')}
+  else{const k=(sp.o||sp.ob)[0];ttl='작성자가 직접 남긴 평가';body=k+' <mark>'+r.o[k]+'</mark>'}
+  return `<div class="hit"><b>${SPARK} ${ttl}</b>${body}</div>`;
 }
 function renderChips(){
   const ck='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="2.6"><path d="m4.5 12.5 4.5 4.5L19.5 6.5"/></svg>';
