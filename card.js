@@ -19,9 +19,9 @@
   /* 상품별로 카드에 올릴 후보 칩 (구매 결정에 중요한 걱정 위주, 앞에 있을수록 우선)
      pair: 카드 위쪽에 함께 보여줄 대비 항목 (답 미리보기) */
   const PLAN={
-    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad']},
-    '보조배터리':{cand:['heavy','wt','slow','cnt','heat','bad','time','trip'],pair:['wt','heavy']},
-    '트레이닝복':{cand:['sz2','sz1','sz0','len','see','wash','wst','fur'],pair:['sz0','sz1','sz2']}
+    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad'],basis:'맛·식감·배송 상태'},
+    '보조배터리':{cand:['heavy','wt','slow','cnt','heat','bad','time','trip'],pair:['wt','heavy'],basis:'사용 기기·충전·무게'},
+    '트레이닝복':{cand:['sz2','sz1','sz0','len','see','wash','wst','fur'],pair:['sz0','sz1','sz2'],basis:'키·사이즈·착용감'}
   };
   const plan=PLAN[PRODUCT];if(!plan)return;
   const byId=id=>CHIPS.find(s=>s.id===id);
@@ -34,8 +34,9 @@
   .ccard{margin:14px 16px;padding:14px 0 14px;border:1px solid #e3e6ea;border-radius:12px;background:#fafbfc;overflow:hidden}
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
   .ccard .cc-h b{flex:1;font-size:15.5px}
-  .ccard .cc-h small{display:flex;align-items:center;gap:4px;margin-top:3px;font-weight:400;font-size:13px;color:#5a6070}
-  .ccard .cc-h small svg{width:12px;height:12px;flex:none}
+  .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:13px;line-height:1.5;color:#5a6070}
+  .ccard .cc-h small svg{display:inline-block;width:12px;height:12px;margin-right:3px;vertical-align:-1px}
+  .ccard .cc-h small em{font-style:normal;font-weight:700;color:#333}
   .ccard .cc-x{flex:none;width:28px;height:28px;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cats{gap:8px;padding:10px 14px 0}
   .ccard .chip{height:36px;padding:0 14px;border:1px solid #dfe3e8;border-radius:18px;font-size:14.5px;font-weight:600;color:#333;gap:5px}
@@ -46,7 +47,7 @@
   function pickChips(){return CHIPS.slice()}
   function cardHTML(){
     return `<div class="ccard" id="ccard" role="region" aria-label="AI 맞춤 선택칩 안내">
-      <div class="cc-h"><b>찾는 내용이 있으세요?<small>${typeof SPARK!=='undefined'?SPARK:''}AI 맞춤 선택칩으로 원하는 후기만 모아 볼 수 있어요</small></b>
+      <div class="cc-h"><b>찾는 내용이 있으세요?<small>${typeof SPARK!=='undefined'?SPARK:''}<em>AI 맞춤 선택칩</em>은 후기에 자주 나온 <em>${plan.basis}</em>별로 AI가 묶은 후기예요. 숫자는 후기 수예요.</small></b>
       <button class="cc-x" data-cc="close" aria-label="닫기">×</button></div>
       <div class="cats">${shownChips.map(s=>`<button class="chip" data-cc="chip" data-v="${s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('')}</div>
     </div>`;
