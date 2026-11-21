@@ -19,9 +19,9 @@
   /* 상품별로 카드에 올릴 후보 칩 (구매 결정에 중요한 걱정 위주, 앞에 있을수록 우선)
      pair: 카드 위쪽에 함께 보여줄 대비 항목 (답 미리보기) */
   const PLAN={
-    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad'],basis:'맛·식감·배송 상태'},
-    '보조배터리':{cand:['heavy','wt','slow','cnt','heat','bad','time','trip'],pair:['wt','heavy'],basis:'사용 기기·충전·무게'},
-    '트레이닝복':{cand:['sz2','sz1','sz0','len','see','wash','wst','fur'],pair:['sz0','sz1','sz2'],basis:'키·사이즈·착용감'}
+    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad'],basis:'내 입맛과 식단 목적, 걱정되는 점'},
+    '보조배터리':{cand:['heavy','wt','slow','cnt','heat','bad','time','trip'],pair:['wt','heavy'],basis:'내 폰 기종과 쓰는 상황'},
+    '트레이닝복':{cand:['sz2','sz1','sz0','len','see','wash','wst','fur'],pair:['sz0','sz1','sz2'],basis:'내 키와 체형'}
   };
   const plan=PLAN[PRODUCT];if(!plan)return;
   const byId=id=>CHIPS.find(s=>s.id===id);
@@ -33,21 +33,21 @@
   css.textContent=`
   .ccard{margin:14px 16px;padding:14px 0 14px;border:1px solid #e3e6ea;border-radius:12px;background:#fafbfc;overflow:hidden}
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
-  .ccard .cc-h b{flex:1;font-size:15.5px}
-  .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:13px;line-height:1.5;color:#5a6070}
+  .ccard .cc-h b{flex:1;font-size:14px;font-weight:700}
+  .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:13px;line-height:1.5;color:#7a7f88}
   .ccard .cc-h small svg{display:inline-block;width:12px;height:12px;margin-right:3px;vertical-align:-1px}
   .ccard .cc-h small em{font-style:normal;font-weight:700;color:#333}
   .ccard .cc-x{flex:none;width:28px;height:28px;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cats{gap:6px;padding:10px 14px 0}
   .ccard .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
-  .ccard .chip small{font-size:12.5px;font-weight:400;color:#9a9fa7}`;
+  .ccard .chip small{font-size:13px;font-weight:400;color:#9a9fa7}`;
   document.head.appendChild(css);
 
   /* 위쪽 AI 맞춤 선택칩 줄을 그대로 다시 보여준다 (순서도 동일) */
   function pickChips(){return CHIPS.slice()}
   function cardHTML(){
     return `<div class="ccard" id="ccard" role="region" aria-label="AI 맞춤 선택칩 안내">
-      <div class="cc-h"><b>찾는 내용이 있으세요?<small>${typeof SPARK!=='undefined'?SPARK:''}<em>AI 맞춤 선택칩</em>은 후기에 자주 나온 <em>${plan.basis}</em>별로 AI가 묶은 후기예요. 숫자는 후기 수예요.</small></b>
+      <div class="cc-h"><b>찾는 내용이 있으세요?<small>${typeof SPARK!=='undefined'?SPARK:''}<em>AI 맞춤 선택칩</em>으로 ${plan.basis}에 맞는 후기만 골라 볼 수 있어요</small></b>
       <button class="cc-x" data-cc="close" aria-label="닫기">×</button></div>
       <div class="cats">${shownChips.map(s=>`<button class="chip" data-cc="chip" data-v="${s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('')}</div>
     </div>`;

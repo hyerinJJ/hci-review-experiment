@@ -291,7 +291,7 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .pch{display:flex;flex-wrap:wrap;gap:8px}
 .pch.col{max-height:88px;overflow:hidden}
 .pch .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;font-size:14px;font-weight:400;color:#333;gap:4px}
-.pch .chip small{font-size:12.5px;color:#9a9fa7;font-weight:400}
+.pch .chip small{font-size:13px;color:#9a9fa7;font-weight:400}
 .hit{margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#eef3ff;font-size:14px;line-height:1.55;color:#333}
 .hit b{display:flex;align-items:center;gap:3px;font-size:12px;color:#2f6bff;margin-bottom:2px}
 .hit mark{background:#d6e2ff;color:inherit;border-radius:2px;padding:0 1px}
@@ -316,12 +316,12 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#333}
 .fz-row{display:flex;gap:8px;margin:8px -16px 0;padding:4px 16px;overflow-x:auto;scrollbar-width:none}
 .fz-row::-webkit-scrollbar{display:none}
-.fc{flex:none;position:relative;display:inline-flex;align-items:center;gap:5px;height:var(--fz-h);padding:0 14px;border:1px solid var(--fz-ln);border-radius:var(--fz-r);background:#fff;font-size:14.5px;font-weight:600;color:#333;cursor:pointer;white-space:nowrap}
-.fc.ic{width:var(--fz-h);padding:0;justify-content:center;border-radius:10px}
+.fc{flex:none;position:relative;display:inline-flex;align-items:center;gap:5px;height:var(--fz-h);padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;cursor:pointer;white-space:nowrap}
+.fc.ic{width:var(--fz-h);padding:0;justify-content:center;border-radius:6px}
 .fc svg{flex:none}
 .fc input{position:absolute;opacity:0;width:1px;height:1px}
 .fc .ck{display:grid;place-items:center;width:16px;height:16px;border-radius:4px;border:1.5px solid #c3c9d1;color:transparent}
-.fc.on,.fc:has(input:checked){border-color:var(--pri);background:var(--pri-bg);color:#2b50d8}
+.fc.on,.fc:has(input:checked){border-color:var(--pri);background:#fff;color:var(--pri)}
 .fc:has(input:checked) .ck{background:var(--pri);border-color:var(--pri);color:#fff}
 .fc:has(input:focus-visible){outline:0;box-shadow:0 0 0 2px var(--pri)}
 .fc select:focus,.fc input:focus{outline:0}
@@ -330,14 +330,14 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
 .fc.ic.on::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--pri)}
 /* AI 맞춤 선택칩 */
 .fz-ai{margin-top:14px;padding-top:12px;border-top:1px dashed #e4e6ea}
-.fz .chiphd{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;padding:0;font-size:14.5px;font-weight:800}
+.fz .chiphd{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;padding:0;font-size:14px;font-weight:700}
 .fz .chiphd svg{align-self:center}
-.fz .chiphd small{font-weight:400;color:#7a7f88;font-size:12.5px}
+.fz .chiphd small{font-weight:400;color:#7a7f88;font-size:13px}
 .fz .cats{gap:6px;margin:0 -16px;padding:10px 16px 0}
 .fz .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
-.fz .chip small{font-size:12.5px;font-weight:400;color:#9a9fa7}
-.fz .chip.on{border:1px solid var(--ai);background:#fff;color:var(--ai);font-weight:600}
-.fz .chip.on small{color:var(--ai)}
+.fz .chip small{font-size:13px;font-weight:400;color:#9a9fa7}
+.fz .chip.on{border:1px solid var(--pri);background:#fff;color:var(--pri);font-weight:600}
+.fz .chip.on small{color:var(--pri)}
 .fz .chip.on svg{stroke:#2f6bff}
 .fz .cs{margin:10px 0 0;padding:10px 12px;border:0;border-radius:10px;background:var(--ai-bg);font-size:13.5px;line-height:1.5;color:#4a4f5a}
 .fz .cs b{display:inline;margin:0 4px 0 0;color:#1f2937}
@@ -421,7 +421,7 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
       <label class="fc" id="fpho"><input type="checkbox" id="pho" checked><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>사진/동영상</label>
     </div>
     <div class="fz-ai">
-      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>후기에 자주 나온 맛·식감·배송 상태별로 AI가 묶었어요</small></div>
+      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>내 입맛과 식단 목적, 걱정되는 점에 맞는 후기만 골라 볼 수 있어요</small></div>
       <div class="cats" id="cats" role="group" aria-label="AI 맞춤 선택칩"></div>
       <div id="cs"></div>
     </div>
@@ -807,6 +807,6 @@ $('#imgs').innerHTML=DETAIL_H.map((h,i)=>`<img loading="lazy" src="${img('detail
 paintStars();buildSurvey();renderAll();
 show('product',true);intro();
 </script>
-<script src="card.js?v=7"></script>
+<script src="card.js?v=8"></script>
 </body>
 </html>
