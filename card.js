@@ -35,6 +35,8 @@
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px}
   .ccard .cc-h b{flex:1;font-size:15.5px;line-height:1.4}
   .ccard .cc-h small{display:block;margin-top:2px;font-weight:400;font-size:13px;color:#7a7f88}
+  .ccard .cc-tag{display:inline-flex;align-items:center;gap:4px;margin-bottom:6px;padding:2px 8px;border-radius:6px;background:#f5f1ff;color:#6a35cf;font-size:12.5px;font-weight:700}
+  .ccard .cc-tag svg{width:12px;height:12px}
   .ccard .cc-x{flex:none;width:28px;height:28px;margin:-4px -4px 0 0;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cc-pv{margin:10px 0 0;padding:8px 10px;border-radius:8px;background:#f3efff;font-size:13.5px;line-height:1.5;color:#4a4f5a}
   .ccard .cc-pv mark{background:none;color:#5a2bbf;font-weight:700}
@@ -50,7 +52,7 @@
     for(const id in seen){const r=R[+id];if(!r)continue;for(const t of r.t)dwell[t]=(dwell[t]||0)+seen[id]}
     return plan.cand.map((id,i)=>({id,sp:byId(id),i}))
       .filter(x=>x.sp)
-      .map(x=>({...x,score:(dwell[x.id]||0)/1000+(CHIP_N[x.id]||0)*0.2-x.i*0.5}))
+      .map(x=>({...x,score:(dwell[x.id]||0)/1000+(CHIP_N[x.id]||0)*0.05-x.i*0.3}))
       .sort((a,b)=>b.score-a.score).slice(0,CFG.showN).map(x=>x.sp);
   }
   function previewHTML(){
@@ -60,7 +62,8 @@
   }
   function cardHTML(){
     return `<div class="ccard" id="ccard" role="region" aria-label="상황 맞춤 칩">
-      <div class="cc-h"><b>찾는 내용이 있으세요?<small>다른 구매자들이 후기에서 많이 확인한 내용이에요. 누르면 해당 후기만 모아 볼 수 있어요.</small></b>
+      <div class="cc-tag">${typeof SPARK!=='undefined'?SPARK:''}AI 맞춤 선택칩</div>
+      <div class="cc-h"><b>찾는 내용이 있으세요?<small>지금까지 보신 후기를 바탕으로 골랐어요. 누르면 해당 후기만 모아 볼 수 있어요.</small></b>
       <button class="cc-x" data-cc="close" aria-label="닫기">×</button></div>
       ${previewHTML()}
       <div class="cc-chips">${shownChips.map(s=>`<button class="cc-chip" data-cc="chip" data-v="${s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('')}</div>
