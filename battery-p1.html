@@ -262,22 +262,26 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .n .exb{margin-left:0}
 .gr{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 9px;border-radius:11px;font-size:12px;font-weight:800;letter-spacing:0;white-space:nowrap}
 .gr i{font-style:normal;font-weight:600;font-size:11px}
-.gr.g1{background:linear-gradient(110deg,#f9dc5c,#e0a90f 55%,#f9dc5c);color:#4a3200;box-shadow:0 0 0 1px #d4a017 inset}
-.gr.g2{position:relative;background:linear-gradient(110deg,#a9b8d4 0%,#eef3ff 38%,#8fa5cf 55%,#eef3ff 72%,#a9b8d4 100%);background-size:220% 100%;animation:shine2 2.2s linear infinite;color:#17233d;box-shadow:0 0 0 1px #7f93bd inset,0 0 9px rgba(100,135,225,.65)}
-.gr.g2::before{content:"✦";display:inline-block;font-size:11px;color:#3b63d6;animation:twk2 1.5s ease-in-out infinite}
-@keyframes shine2{0%{background-position:120% 0}100%{background-position:-120% 0}}
-@keyframes twk2{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.4) rotate(20deg);opacity:.6}}
-@media (prefers-reduced-motion:reduce){.gr.g2,.gr.g2::before{animation:none}}
+.gr.g1,.gr.g2,.gr.g3{position:relative;background-size:220% 100%;animation:shineg 2.2s linear infinite}
+.gr.g1::before,.gr.g2::before,.gr.g3::before{content:"✦";display:inline-block;font-size:11px;animation:twkg 1.5s ease-in-out infinite}
+.gr.g1{background-image:linear-gradient(110deg,#f2bd2e 0%,#fff2b0 38%,#d49a12 55%,#fff2b0 72%,#f2bd2e 100%);color:#4a3200;box-shadow:0 0 0 1px #d4a017 inset,0 0 9px rgba(255,196,40,.65)}
+.gr.g1::before{color:#a56d00}
+.gr.g2{background-image:linear-gradient(110deg,#b3b9c4 0%,#f7f9fc 38%,#8f97a4 55%,#f7f9fc 72%,#b3b9c4 100%);color:#262d38;box-shadow:0 0 0 1px #9aa2af inset,0 0 9px rgba(150,160,180,.7)}
+.gr.g2::before{color:#59647a}
+.gr.g3{background-image:linear-gradient(110deg,#b86f35 0%,#f3bd8c 38%,#945322 55%,#f3bd8c 72%,#b86f35 100%);color:#341804;box-shadow:0 0 0 1px #8a4c1f inset,0 0 9px rgba(190,115,55,.6)}
+.gr.g3::before{color:#6b3410}
+@keyframes shineg{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@keyframes twkg{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.4) rotate(20deg);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.gr.g1,.gr.g2,.gr.g3,.gr::before{animation:none}}
 .expsort{padding:6px 16px 0}
 .expsort button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:12px 14px;border:1.5px solid #d6d9dc;border-radius:12px;background:#fff}
 .expsort b{display:block;font-size:15px}.expsort small{display:block;margin-top:2px;font-size:12.5px;color:#667}
 .expsort .xb{display:flex;gap:4px;flex:none}
 .expsort .xb .gr{padding:0;width:22px;justify-content:center}
-.expsort .xb .gr.g2::before{display:none}
+.expsort .xb .gr::before{display:none}
 .expsort button.on{border-color:#2f6bff;background:#f0f5ff}
 .expsort button.on b::after{content:" ✓";color:#2f6bff}
-.gr.g3{background:#2f6bff;color:#fff}
-.gr.g4{background:#ffe14d;color:#5a4700}
+.gr.g4{background:#2f6bff;color:#fff}
 .gr.g5{background:#e1e4e8;color:#6b727c}
 .glg{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
 .glg .gr{opacity:.45}.glg .gr.me{opacity:1;outline:2px solid #111;outline-offset:1px}
@@ -307,7 +311,7 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 .xinfo p{margin:6px 0 0;font-size:13px;line-height:1.5;color:#4a4f5a}
 .xinfo .xb2{display:flex;align-items:center;gap:4px;margin-top:8px}
 .xinfo .xb2 .gr{width:22px;padding:0;justify-content:center}
-.xinfo .xb2 .gr.g2::before{display:none}
+.xinfo .xb2 .gr::before{display:none}
 .xinfo .xb2 small{margin-left:4px;font-size:12px;color:#7a7f88}
 ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#333}
 .fz-row{display:flex;gap:8px;margin:8px -16px 0;padding:4px 16px;overflow-x:auto;scrollbar-width:none}
@@ -552,7 +556,7 @@ function gradeOf(r){
 R.forEach(r=>{tagReview(r);r.sc=expScore(r)});R.forEach(r=>{r.g=gradeOf(r)});
 
 const SPARK='<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>';
-const GR_NAME={1:'금색',2:'실버',3:'파랑',4:'노랑',5:'회색'};
+const GR_NAME={1:'금색',2:'은색',3:'동색',4:'파랑',5:'회색'};
 function gradeHTML(r){return `<button class="gr g${r.g}" data-a="grade" data-v="${r.id}" aria-label="경험 리뷰어 ${r.g}등급"><i>경험 리뷰어</i>${r.g}</button>`}
 const CHIP_N={};R.forEach(r=>r.t.forEach(t=>CHIP_N[t]=(CHIP_N[t]||0)+1));
 const CHIPS=CHIP_SPECS.filter(s=>(CHIP_N[s.id]||0)>=3);
@@ -592,7 +596,7 @@ function gradeInfo(){
 
 function gradeSheet(r){
   const lg=[1,2,3,4,5].map(g=>`<span class="gr g${g} ${g===r.g?'me':''}"><i>경험 리뷰어</i>${g}</span>`).join('');
-  sheet(`<h3>경험 리뷰어 ${r.g}등급</h3><div class="glg">${lg}</div><p><b>${r.n}</b>님의 등급이에요. 1등급(금색)에 가까울수록 자신의 경험을 풍부하게 서술하는 리뷰어예요.</p><p class="sm">상품 정보나 장점을 나열하는 대신, <b>자신이 어떤 사람인지</b>, <b>어떤 상황에서 잘 맞았는지</b>, <b>어떤 사람에게 추천하는지</b>를 구체적으로 적은 리뷰를 쓸수록 등급이 높아져요.</p><p class="sm">1등급 금색 · 2등급 실버 · 3등급 파랑 · 4등급 노랑 · 5등급 회색</p><div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
+  sheet(`<h3>경험 리뷰어 ${r.g}등급</h3><div class="glg">${lg}</div><p><b>${r.n}</b>님의 등급이에요. 1등급(금색)에 가까울수록 자신의 경험을 풍부하게 서술하는 리뷰어예요.</p><p class="sm">상품 정보나 장점을 나열하는 대신, <b>자신이 어떤 사람인지</b>, <b>어떤 상황에서 잘 맞았는지</b>, <b>어떤 사람에게 추천하는지</b>를 구체적으로 적은 리뷰를 쓸수록 등급이 높아져요.</p><p class="sm">1등급 금색 · 2등급 은색 · 3등급 동색 · 4등급 파랑 · 5등급 회색</p><div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
 }
 function renderSummary(){
   $('#sum').className='sum';
