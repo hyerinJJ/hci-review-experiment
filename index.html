@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>리뷰 화면 사용성 실험</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="config.js?v=11"></script>
-<script src="lab.js?v=11"></script>
+<script src="config.js?v=12"></script>
+<script src="lab.js?v=12"></script>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--tx:#111827;--tx2:#5b6472;--tx3:#8b93a1;--ln:#e3e7ed;--pri:#4168f6;--pri-bg:#edf1ff;--ok:#1f8a4c;--ok-bg:#e7f6ec;color-scheme:light}
 *{box-sizing:border-box}
@@ -93,7 +93,7 @@ function render(){
   if(!inPlan&&document.activeElement!==$('#pidin'))$('#pidin').value=st.pid;
   if(inPlan&&document.activeElement!==$('#pidin'))$('#pidin').value='';
   const pl=LAB.plan[st.pid];
-  $('#planbox').innerHTML=pl?`<div class="plan">${pl.map(([pr,c],i)=>{const d=done(st.pid,pr,c);return `<button class="slot ${d?'done':''}" data-go="${pr},${c},${i+1}"><img src="${P[pr].img}" alt=""><span class="t"><small>구매 판단 과제 ${i+1}</small><b>${P[pr].name}<span class="tag ${c}">${CN[c]}</span></b></span><span class="go">${d?'완료':'시작'}</span></button>`}).join('')}${LAB.writeUrl?`<button class="slot" data-write="1"><span class="wi" aria-hidden="true">✍</span><span class="t"><small>리뷰 작성 activity</small><b>사전에 받은 품목<span class="tag">${(LAB.writeOrder[st.pid]||['직접 쓰기','말로 쓰기']).join(' → ')}</span></b></span><span class="go">열기</span></button>`:''}</div><p class="hint">배치표대로 진행하려면 과제를 누르세요. 다른 조합은 아래에서 고를 수 있어요.</p>`:'';
+  $('#planbox').innerHTML=pl?`<div class="plan">${pl.map(([pr,c],i)=>{const d=done(st.pid,pr,c);return `<button class="slot ${d?'done':''}" data-go="${pr},${c},${i+1}"><img src="${P[pr].img}" alt=""><span class="t"><small>구매 판단 과제 ${i+1}</small><b>${P[pr].name}<span class="tag ${c}">${CN[c]}</span></b></span><span class="go">${d?'완료':'시작'}</span></button>`}).join('')}${LAB.writeUrl?`<button class="slot" data-write="1"><span class="wi" aria-hidden="true">✍</span><span class="t"><small>리뷰 작성 activity</small><b>사전에 받은 품목<span class="tag">말로 쓰기</span></b></span><span class="go">열기</span></button>`:''}</div><p class="hint">배치표대로 진행하려면 과제를 누르세요. 다른 조합은 아래에서 고를 수 있어요.</p>`:'';
   $('#prods').innerHTML=Object.entries(P).map(([k,p])=>`<button class="prod ${st.prod===k?'on':''}" role="radio" aria-checked="${st.prod===k}" data-prod="${k}"><img src="${p.img}" alt=""><span>${p.name}</span></button>`).join('');
   $('#conds').innerHTML=Object.entries(CN).map(([k,n])=>`<button class="${st.cond===k?'on':''}" role="radio" aria-checked="${st.cond===k}" data-cond="${k}">${n}<small>${CDESC[k]}</small></button>`).join('');
   const ok=st.pid&&st.prod&&st.cond;
