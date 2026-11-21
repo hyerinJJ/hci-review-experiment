@@ -686,10 +686,9 @@ function renderGrids(){
 }
 function sorted(list){
   if(st.sort==='new')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
-  /* 베스트순: 별점과 '도움이 돼요' 수를 함께 반영 (별점 + 0.9 x log2(1+도움 수)). 같으면 원래 순서
-     경험 리뷰어 등급순: 등급(1등급 먼저) 다음 베스트순 */
-  const sc=r=>r.s+0.9*Math.log2(1+(r.h||0));
-  return list.slice().sort((a,b)=>(st.sort==='exp'?(a.g-b.g):0)||(sc(b)-sc(a))||(a.id-b.id));
+  /* 베스트순: 실제 쿠팡 베스트순(rk) 그대로. 같으면 도움 수
+     경험 리뷰어순: 등급(1등급 먼저) 다음 실제 베스트순 */
+  return list.slice().sort((a,b)=>(st.sort==='exp'?(a.g-b.g):0)||((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0)));
 }
 function renderProductReviews(){
   const l=sorted(R.filter(r=>r.ph.length)).slice(0,PROD_N);

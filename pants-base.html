@@ -562,8 +562,8 @@ function renderSummary(){
 }
 function sorted(list){
   if(st.sort!=='best')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
-  /* 베스트순: 5점 전체, 4점 전체, 3점, 2점, 1점 순서. 같은 별점 안에서는 원래 베스트순 */
-  return list.slice().sort((a,b)=>(b.s-a.s)||(a.id-b.id));
+  /* 베스트순: 실제 쿠팡 베스트순(rk) 그대로. 같으면 도움 수 */
+  return list.slice().sort((a,b)=>((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0)));
 }
 function renderProductReviews(){
   const l=sorted(R.filter(r=>r.ph.length)).slice(0,PROD_N);
