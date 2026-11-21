@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>리뷰 화면 사용성 실험</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="config.js?v=10"></script>
-<script src="lab.js?v=10"></script>
+<script src="config.js?v=11"></script>
+<script src="lab.js?v=11"></script>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--tx:#111827;--tx2:#5b6472;--tx3:#8b93a1;--ln:#e3e7ed;--pri:#4168f6;--pri-bg:#edf1ff;--ok:#1f8a4c;--ok-bg:#e7f6ec;color-scheme:light}
 *{box-sizing:border-box}
@@ -30,6 +30,7 @@ h1{margin:4px 0 6px;font-size:25px;line-height:1.3;letter-spacing:-.03em}
 .custom input:focus{border-color:var(--pri);outline:0}
 .plan{margin-top:14px;display:grid;gap:8px}
 .slot{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 10px;border:1px solid var(--ln);border-radius:14px;background:#fff;text-align:left;width:100%}
+.slot .wi{display:grid;place-items:center;width:52px;height:52px;border-radius:10px;background:#f1f3f6;font-size:22px;flex:none}
 .slot img{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;background:#eee}
 .slot .t{flex:1;min-width:0}
 .slot .t small{display:block;color:var(--tx3);font-size:12.5px;font-weight:700}
@@ -92,7 +93,7 @@ function render(){
   if(!inPlan&&document.activeElement!==$('#pidin'))$('#pidin').value=st.pid;
   if(inPlan&&document.activeElement!==$('#pidin'))$('#pidin').value='';
   const pl=LAB.plan[st.pid];
-  $('#planbox').innerHTML=pl?`<div class="plan">${pl.map(([pr,c],i)=>{const d=done(st.pid,pr,c);return `<button class="slot ${d?'done':''}" data-go="${pr},${c},${i+1}"><img src="${P[pr].img}" alt=""><span class="t"><small>구매 판단 과제 ${i+1}</small><b>${P[pr].name}<span class="tag ${c}">${CN[c]}</span></b></span><span class="go">${d?'완료':'시작'}</span></button>`}).join('')}</div><p class="hint">배치표대로 진행하려면 과제를 누르세요. 다른 조합은 아래에서 고를 수 있어요.</p>`:'';
+  $('#planbox').innerHTML=pl?`<div class="plan">${pl.map(([pr,c],i)=>{const d=done(st.pid,pr,c);return `<button class="slot ${d?'done':''}" data-go="${pr},${c},${i+1}"><img src="${P[pr].img}" alt=""><span class="t"><small>구매 판단 과제 ${i+1}</small><b>${P[pr].name}<span class="tag ${c}">${CN[c]}</span></b></span><span class="go">${d?'완료':'시작'}</span></button>`}).join('')}${LAB.writeUrl?`<button class="slot" data-write="1"><span class="wi" aria-hidden="true">✍</span><span class="t"><small>리뷰 작성 activity</small><b>사전에 받은 품목<span class="tag">${(LAB.writeOrder[st.pid]||['직접 쓰기','말로 쓰기']).join(' → ')}</span></b></span><span class="go">열기</span></button>`:''}</div><p class="hint">배치표대로 진행하려면 과제를 누르세요. 다른 조합은 아래에서 고를 수 있어요.</p>`:'';
   $('#prods').innerHTML=Object.entries(P).map(([k,p])=>`<button class="prod ${st.prod===k?'on':''}" role="radio" aria-checked="${st.prod===k}" data-prod="${k}"><img src="${p.img}" alt=""><span>${p.name}</span></button>`).join('');
   $('#conds').innerHTML=Object.entries(CN).map(([k,n])=>`<button class="${st.cond===k?'on':''}" role="radio" aria-checked="${st.cond===k}" data-cond="${k}">${n}<small>${CDESC[k]}</small></button>`).join('');
   const ok=st.pid&&st.prod&&st.cond;
@@ -109,6 +110,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.pid){st.pid=t.dataset.pid;render()}
   else if(t.dataset.prod){st.prod=t.dataset.prod;render()}
   else if(t.dataset.cond){st.cond=t.dataset.cond;render()}
+  else if(t.dataset.write){if(!st.pid)return;LAB.LS.set('lab_last_pid',st.pid);const u=new URL(LAB.writeUrl);u.searchParams.set('pid',st.pid);if(LAB.gasUrl()&&LAB.gasUrl()!==(window.LAB_CONFIG||{}).GAS_URL)u.searchParams.set('gs',LAB.gasUrl());location.href=u.toString()}
   else if(t.dataset.go){const [p,c,i]=t.dataset.go.split(',');go(p,c,i)}
   else if(t.id==='start')go(st.prod,st.cond,'');
 });
