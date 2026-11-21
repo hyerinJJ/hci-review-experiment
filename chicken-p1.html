@@ -290,7 +290,7 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .pcn{margin:0 0 10px;font-size:14px;color:#555;line-height:1.5}
 .pch{display:flex;flex-wrap:wrap;gap:8px}
 .pch.col{max-height:88px;overflow:hidden}
-.pch .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;font-size:14px;font-weight:400;color:#333;gap:4px}
+.pch .chip{height:34px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;font-size:14px;font-weight:400;color:#333;gap:4px}
 .pch .chip small{font-size:13px;color:#9a9fa7;font-weight:400}
 .hit{margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#eef3ff;font-size:14px;line-height:1.55;color:#333}
 .hit b{display:flex;align-items:center;gap:3px;font-size:12px;color:#2f6bff;margin-bottom:2px}
@@ -299,11 +299,14 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 /* ===== P1 리뷰 필터 영역 (정렬, 기본 필터, AI 킬러, AI 맞춤 선택칩) ===== */
 .fz{--fz-h:36px;--fz-r:18px;--fz-ln:#dfe3e8;--ai:#2f6bff;--ai-bg:#eef3ff;margin-top:14px;padding:14px 16px 16px;border-top:8px solid var(--bg2);border-bottom:1px solid #eef0f3;background:#fff}
 .fz-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fz-top[hidden]{display:none}
 .fz-n{font-size:16px;font-weight:800;letter-spacing:-.02em}
-.fz-sort{display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:3px;margin-top:12px;padding:3px;border-radius:11px;background:#f1f3f6}
-.fz-sort button{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:34px;padding:0 6px;border-radius:8px;font-size:14px;color:var(--tx2);white-space:nowrap}
-.fz-sort button.on{background:#fff;color:#111;font-weight:700;box-shadow:0 1px 3px rgba(17,24,39,.12)}
-.fz-sort .gdot{width:10px;height:10px;border-radius:50%;background:linear-gradient(110deg,#f9dc5c,#e0a90f);box-shadow:0 0 0 1px #d4a017 inset}
+.fz-sort{display:flex;align-items:center;margin-top:0}
+.fz-sort button{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px;font-size:13px;color:#8a8f98;white-space:nowrap;background:none}
+.fz-sort button:first-child{padding-left:0}
+.fz-sort button+button{border-left:1px solid #dcdfe3;height:12px;padding-top:0;padding-bottom:0;border-radius:0}
+.fz-sort button.on{color:#111;font-weight:700}
+.fz-sort .gdot{width:8px;height:8px;border-radius:50%;background:linear-gradient(110deg,#f9dc5c,#e0a90f);box-shadow:0 0 0 1px #d4a017 inset}
 .xinfo{margin-top:10px;padding:12px;border-radius:12px;background:#f6f8fc;border:1px solid #e3e8f2}
 .xinfo .xt{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .xinfo .xt b{font-size:14.5px}
@@ -314,14 +317,14 @@ dialog .tbig{font-size:34px;font-weight:800;margin:4px 0}
 .xinfo .xb2 .gr::before{display:none}
 .xinfo .xb2 small{margin-left:4px;font-size:12px;color:#7a7f88}
 ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#333}
-.fz-row{display:flex;gap:8px;margin:8px -16px 0;padding:4px 16px;overflow-x:auto;scrollbar-width:none}
+.fz-row{display:flex;gap:6px;margin:8px -16px 0;padding:4px 16px;overflow-x:auto;scrollbar-width:none}
 .fz-row::-webkit-scrollbar{display:none}
-.fc{flex:none;position:relative;display:inline-flex;align-items:center;gap:5px;height:var(--fz-h);padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;cursor:pointer;white-space:nowrap}
+.fc{flex:none;position:relative;display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;cursor:pointer;white-space:nowrap}
 .fc.ic{width:var(--fz-h);padding:0;justify-content:center;border-radius:6px}
 .fc svg{flex:none}
 .fc input{position:absolute;opacity:0;width:1px;height:1px}
 .fc .ck{display:grid;place-items:center;width:16px;height:16px;border-radius:4px;border:1.5px solid #c3c9d1;color:transparent}
-.fc.on,.fc:has(input:checked){border-color:var(--pri);background:#fff;color:var(--pri)}
+.fc.on,.fc:has(input:checked){border-color:var(--pri);background:#fff;color:var(--pri);font-weight:600}
 .fc:has(input:checked) .ck{background:var(--pri);border-color:var(--pri);color:#fff}
 .fc:has(input:focus-visible){outline:0;box-shadow:0 0 0 2px var(--pri)}
 .fc select:focus,.fc input:focus{outline:0}
@@ -333,8 +336,12 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
 .fz .chiphd{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;padding:0;font-size:14px;font-weight:700}
 .fz .chiphd svg{align-self:center}
 .fz .chiphd small{font-weight:400;color:#7a7f88;font-size:13px}
+.fz .chiphd{position:relative;align-items:center}
+.ib{display:inline-grid;place-items:center;width:16px;height:16px;margin-left:2px;padding:0;border:1px solid #b5bac2;border-radius:50%;background:#fff;color:#8a8f98;font:700 11px/1 Georgia,serif;font-style:italic;cursor:pointer}
+.tip{position:absolute;left:0;top:calc(100% + 8px);z-index:20;max-width:300px;padding:10px 12px;border-radius:6px;background:#2b2f36;color:#fff;font-size:13px;font-weight:400;line-height:1.5;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.tip::before{content:"";position:absolute;left:112px;top:-5px;width:10px;height:10px;background:#2b2f36;transform:rotate(45deg)}
 .fz .cats{gap:6px;margin:0 -16px;padding:10px 16px 0}
-.fz .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
+.fz .chip{height:34px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
 .fz .chip small{font-size:13px;font-weight:400;color:#9a9fa7}
 .fz .chip.on{border:1px solid var(--pri);background:#fff;color:var(--pri);font-weight:600}
 .fz .chip.on small{color:var(--pri)}
@@ -413,15 +420,15 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
   <div style="display:flex;justify-content:flex-end;padding:4px 16px 0"><button class="lk2" id="barbtn" data-a="bars" aria-expanded="false">자세히보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 9 7 7 7-7"/></svg></button></div>
   <div class="aisec" id="aisec2" hidden style="margin-top:14px"><div class="sumh"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#spark"/></svg>고객들은 이렇게 리뷰했어요 <span class="aib">BETA</span></div><div class="sum" id="sum2"></div><div class="fb"><span><u>리뷰 요약</u>이 유용했나요?</span><span><button data-a="sumvote" data-v="up" aria-label="유용해요">👍</button><button data-a="sumvote" data-v="down" aria-label="유용하지 않아요">👎</button></span></div></div>
   <div class="fz" id="fz">
-    <div class="fz-top"><b class="fz-n" id="fzn" aria-live="polite">리뷰</b></div>
+    <div class="fz-top" hidden><b class="fz-n" id="fzn" aria-live="polite">리뷰</b></div>
     <div class="fz-sort" role="group" aria-label="정렬"><button data-a="sort" data-v="best" id="s1">베스트순</button><button data-a="sort" data-v="new" id="s2">최신순</button><button data-a="sort" data-v="exp" id="sx" aria-pressed="false"><span class="gdot" aria-hidden="true"></span>경험 리뷰어순</button></div>
     <div class="xinfo" id="xinfo" hidden><div class="xt"><b>경험을 구체적으로 쓴 리뷰어부터 보여줘요</b><button data-a="gradeinfo">기준 보기</button></div><p>자기 상황(체형, 사용 환경 등), 실제로 써본 과정, 어떤 사람에게 맞는지를 적은 리뷰어일수록 등급이 높아요.</p><div class="xb2"><span class="gr g1">1</span><span class="gr g2">2</span><span class="gr g3">3</span><span class="gr g4">4</span><span class="gr g5">5</span><small>1등급부터 순서대로</small></div></div>
     <div class="fz-row" role="group" aria-label="리뷰 필터">
       <label class="fc fsel" id="fstar"><span id="fstarl">별점 전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><select id="starsel" aria-label="별점으로 보기"><option value="0">별점 전체</option><option value="5">5점만</option><option value="4">4점만</option><option value="3">3점만</option><option value="2">2점만</option><option value="1">1점만</option></select></label>
-      <label class="fc" id="fpho"><input type="checkbox" id="pho" checked><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>사진/동영상</label>
+      <label class="fc" id="fpho"><input type="checkbox" id="pho" checked>사진/동영상</label>
     </div>
     <div class="fz-ai">
-      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>내 입맛과 식단 목적, 걱정되는 점에 맞는 후기만 골라 볼 수 있어요</small></div>
+      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<button class="ib" id="chipinfo" aria-label="AI 맞춤 선택칩 설명" aria-expanded="false">i</button><div class="tip" id="chiptip" role="tooltip" hidden>내 입맛과 식단 목적, 걱정되는 점에 맞는 후기만 골라 볼 수 있어요</div></div>
       <div class="cats" id="cats" role="group" aria-label="AI 맞춤 선택칩"></div>
       <div id="cs"></div>
     </div>
@@ -572,10 +579,10 @@ function hitHTML(r,where){
 }
 function renderChips(){
   const ck='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="2.6"><path d="m4.5 12.5 4.5 4.5L19.5 6.5"/></svg>';
-  $('#cats').innerHTML=`<button class="chip ${st.chip?'':'on'}" data-a="chip" data-v="" aria-pressed="${!st.chip}">전체</button>`+CHIPS.map(s=>`<button class="chip ${st.chip===s.id?'on':''}" data-a="chip" data-v="${s.id}" aria-pressed="${st.chip===s.id}">${st.chip===s.id?ck:''}${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('');
+  $('#cats').innerHTML=`<button class="chip ${st.chip?'':'on'}" data-a="chip" data-v="" aria-pressed="${!st.chip}">전체</button>`+CHIPS.map(s=>`<button class="chip ${st.chip===s.id?'on':''}" data-a="chip" data-v="${s.id}" aria-pressed="${st.chip===s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('');
   const on=document.querySelector('#cats .chip.on');if(on&&st.chip){const c=$('#cats');c.scrollLeft=on.offsetLeft-c.clientWidth/2+on.offsetWidth/2}
   const sp=CHIPS.find(s=>s.id===st.chip);
-  $('#cs').innerHTML=sp?`<div class="cs"><b>“${sp.label}” 후기 ${filtered().length}개</b>AI가 후기 본문과 구매자 입력 정보에서 근거를 찾아 표시했어요.</div>`:'';
+  $('#cs').innerHTML=false?`<div class="cs"><b>“${sp.label}” 후기 ${filtered().length}개</b>AI가 후기 본문과 구매자 입력 정보에서 근거를 찾아 표시했어요.</div>`:'';
 }
 /* 필터 영역 상태 표시 */
 function renderFz(n){
@@ -807,6 +814,13 @@ $('#imgs').innerHTML=DETAIL_H.map((h,i)=>`<img loading="lazy" src="${img('detail
 paintStars();buildSurvey();renderAll();
 show('product',true);intro();
 </script>
-<script src="card.js?v=8"></script>
+<script>
+(function(){const b=document.getElementById('chipinfo'),t=document.getElementById('chiptip');if(!b)return;
+function set(o){t.hidden=!o;b.setAttribute('aria-expanded',o)}
+b.addEventListener('click',e=>{e.stopPropagation();const o=t.hidden;set(o);if(o&&typeof log==='function')log('chip_info',{})});
+document.addEventListener('click',e=>{if(!t.hidden&&e.target!==b)set(false)});
+addEventListener('scroll',()=>{if(!t.hidden)set(false)},{passive:true});})();
+</script>
+<script src="card.js?v=9"></script>
 </body>
 </html>
