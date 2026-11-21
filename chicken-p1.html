@@ -290,8 +290,8 @@ dialog h3{margin:0 0 8px;font-size:19px}dialog p{margin:0 0 6px}
 .pcn{margin:0 0 10px;font-size:14px;color:#555;line-height:1.5}
 .pch{display:flex;flex-wrap:wrap;gap:8px}
 .pch.col{max-height:88px;overflow:hidden}
-.pch .chip{height:38px;padding:0 13px;font-size:15px}
-.pch .chip small{font-size:12px;color:#2f6bff;font-weight:700}
+.pch .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;font-size:14px;font-weight:400;color:#333;gap:4px}
+.pch .chip small{font-size:12.5px;color:#9a9fa7;font-weight:400}
 .hit{margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#eef3ff;font-size:14px;line-height:1.55;color:#333}
 .hit b{display:flex;align-items:center;gap:3px;font-size:12px;color:#2f6bff;margin-bottom:2px}
 .hit mark{background:#d6e2ff;color:inherit;border-radius:2px;padding:0 1px}
@@ -333,11 +333,11 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
 .fz .chiphd{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;padding:0;font-size:14.5px;font-weight:800}
 .fz .chiphd svg{align-self:center}
 .fz .chiphd small{font-weight:400;color:#7a7f88;font-size:12.5px}
-.fz .cats{gap:8px;margin:0 -16px;padding:10px 16px 0}
-.fz .chip{height:var(--fz-h);padding:0 14px;border:1px solid var(--fz-ln);border-radius:var(--fz-r);font-size:14.5px;font-weight:600;color:#333;gap:5px}
-.fz .chip small{font-size:12.5px;font-weight:700;color:#8a8f98}
-.fz .chip.on{border:1px solid var(--ai);background:var(--ai-bg);color:#1f4fd6;font-weight:700}
-.fz .chip.on small{color:#4a73f0}
+.fz .cats{gap:6px;margin:0 -16px;padding:10px 16px 0}
+.fz .chip{height:36px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
+.fz .chip small{font-size:12.5px;font-weight:400;color:#9a9fa7}
+.fz .chip.on{border:1px solid var(--ai);background:#fff;color:var(--ai);font-weight:600}
+.fz .chip.on small{color:var(--ai)}
 .fz .chip.on svg{stroke:#2f6bff}
 .fz .cs{margin:10px 0 0;padding:10px 12px;border:0;border-radius:10px;background:var(--ai-bg);font-size:13.5px;line-height:1.5;color:#4a4f5a}
 .fz .cs b{display:inline;margin:0 4px 0 0;color:#1f2937}
@@ -421,7 +421,7 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
       <label class="fc" id="fpho"><input type="checkbox" id="pho" checked><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>사진/동영상</label>
     </div>
     <div class="fz-ai">
-      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>이 상품 후기에서 AI가 뽑았어요</small></div>
+      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<small>후기에 자주 나온 맛·식감·배송 상태별로 AI가 묶었어요</small></div>
       <div class="cats" id="cats" role="group" aria-label="AI 맞춤 선택칩"></div>
       <div id="cs"></div>
     </div>
@@ -807,6 +807,6 @@ $('#imgs').innerHTML=DETAIL_H.map((h,i)=>`<img loading="lazy" src="${img('detail
 paintStars();buildSurvey();renderAll();
 show('product',true);intro();
 </script>
-<script src="card.js?v=6"></script>
+<script src="card.js?v=7"></script>
 </body>
 </html>
