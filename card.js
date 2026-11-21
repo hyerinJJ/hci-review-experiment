@@ -33,14 +33,14 @@
   css.textContent=`
   .ccard{margin:14px 16px;padding:14px 0 14px;border:1px solid #e3e6ea;border-radius:12px;background:#fafbfc;overflow:hidden}
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
-  .ccard .cc-h b{flex:1;font-size:14px;font-weight:700}
-  .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:13px;line-height:1.5;color:#7a7f88}
+  .ccard .cc-h b{flex:1;font-size:13.5px;font-weight:700}
+  .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:12.5px;line-height:1.5;color:#7a7f88}
   .ccard .cc-h small svg{display:inline-block;width:12px;height:12px;margin-right:3px;vertical-align:-1px}
   .ccard .cc-h small em{font-style:normal;font-weight:700;color:#333}
   .ccard .cc-x{flex:none;width:28px;height:28px;border:0;background:none;color:#8a8f98;font-size:20px;line-height:1;cursor:pointer}
   .ccard .cats{gap:6px;padding:10px 14px 0}
-  .ccard .chip{height:34px;padding:0 12px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:14px;font-weight:400;color:#333;gap:4px}
-  .ccard .chip small{font-size:13px;font-weight:400;color:#9a9fa7}`;
+  .ccard .chip{height:32px;padding:0 11px;border:1px solid #dcdfe3;border-radius:6px;background:#fff;font-size:13px;font-weight:400;color:#333;gap:4px}
+  .ccard .chip small{font-size:12px;font-weight:400;color:#9a9fa7}`;
   document.head.appendChild(css);
 
   /* 위쪽 AI 맞춤 선택칩 줄을 그대로 다시 보여준다 (순서도 동일) */
