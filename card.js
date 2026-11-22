@@ -58,8 +58,9 @@
     const list=document.getElementById('list');if(!list)return;
     const cards=[...list.querySelectorAll('.card')];if(!cards.length)return;
     let after=anchor!=null?list.querySelector(`.card[data-rid="${anchor}"]`):null;
-    if(after)after.insertAdjacentHTML('afterend',cardHTML());
-    else cards[0].insertAdjacentHTML('beforebegin',cardHTML());
+    /* 정렬이나 필터가 바뀌어 기준 리뷰가 없거나 맨 위쪽에 오면, 목록 맨 위가 아니라 4번째 리뷰 뒤에 둔다 */
+    if(!after||cards.indexOf(after)<3)after=cards[Math.min(3,cards.length-1)];
+    after.insertAdjacentHTML('afterend',cardHTML());
   }
   function show(reason){
     if(state!=='idle'||st.chip)return;
