@@ -31,7 +31,8 @@
 
   const css=document.createElement('style');
   css.textContent=`
-  .ccard{margin:14px 16px;padding:14px 0 14px;border:1.5px solid #4168f6;border-radius:12px;background:#fafbfc;overflow:hidden}
+  .ccard{position:fixed;top:calc(var(--study,0px) + 50px);left:50%;transform:translateX(-50%);z-index:19;width:calc(100% - 20px);max-width:460px;padding:12px 0 12px;border:1.5px solid #4168f6;border-radius:12px;background:#fff;box-shadow:0 6px 20px rgba(17,24,39,.16);overflow:hidden}
+  @media (prefers-reduced-motion:no-preference){.ccard{animation:ccin .28s ease-out}@keyframes ccin{from{opacity:0;transform:translate(-50%,-14px)}to{opacity:1;transform:translate(-50%,0)}}}
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
   .ccard .cc-h b{flex:1;font-size:13.5px;font-weight:700}
   .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:12.5px;line-height:1.5;color:#7a7f88}
@@ -52,33 +53,23 @@
       <div class="cats">${shownChips.map(s=>`<button class="chip" data-cc="chip" data-v="${s.id}">${s.label}<small>${CHIP_N[s.id]}</small></button>`).join('')}</div>
     </div>`;
   }
+  /* 리뷰 화면 위쪽(상단바 바로 아래)에 고정해서 띄운다. 화면 전체를 가리지 않고, 닫거나 칩을 고를 때까지 유지 */
   function placeCard(){
-    const old=document.getElementById('ccard');if(old)old.remove();
-    if(state!=='shown'||st.chip||view!=='reviews')return;
-    const list=document.getElementById('list');if(!list)return;
-    const cards=[...list.querySelectorAll('.card')];if(!cards.length)return;
-    let after=anchor!=null?list.querySelector(`.card[data-rid="${anchor}"]`):null;
-    /* 정렬이나 필터가 바뀌어 기준 리뷰가 없거나 맨 위쪽에 오면, 목록 맨 위가 아니라 4번째 리뷰 뒤에 둔다 */
-    if(!after||cards.indexOf(after)<3)after=cards[Math.min(3,cards.length-1)];
-    after.insertAdjacentHTML('afterend',cardHTML());
+    const old=document.getElementById('ccard');
+    const want=state==='shown'&&!st.chip&&view==='reviews';
+    if(!want){if(old)old.remove();return}
+    if(old)return;
+    document.body.insertAdjacentHTML('beforeend',cardHTML());
   }
   function show(reason){
     if(state!=='idle'||st.chip)return;
     shownChips=pickChips();if(!shownChips.length)return;
     trigger=reason;state='shown';
-    /* 화면 아래쪽에 곧 나타날 위치에 끼워 넣기 */
-    anchor=null;
-    if(view==='reviews'){
-      const cards=[...document.querySelectorAll('#list .card')];
-      const next=cards.find(c=>c.getBoundingClientRect().top>innerHeight*0.6);
-      const idx=next?cards.indexOf(next):cards.length;
-      anchor=idx>0?cards[idx-1].dataset.rid:null;
-    }
     placeCard();
     log('chip_card_show',{trigger:reason,chips:shownChips.slice(0,CFG.showN).map(s=>s.label).join('|')});
   }
 
-  /* 리뷰 목록이 다시 그려져도 카드 위치 유지 */
+  /* 리뷰 목록이 다시 그려지면 표시 여부 갱신 (칩을 켜면 사라짐) */
   const _render=renderReviews;
   renderReviews=function(){_render.apply(this,arguments);placeCard()};
 
@@ -87,7 +78,7 @@
   log=function(type,data){
     _log(type,data);
     if(type==='decide_cancel')setTimeout(()=>show('decide_cancel'),300);
-    if(type==='view'&&data&&data.to==='reviews'){reviewsSince=performance.now();setTimeout(placeCard,50)}
+    if(type==='view'){if(data&&data.to==='reviews')reviewsSince=performance.now();setTimeout(placeCard,50)}
   };
 
   /* 많이 내렸는데 거의 펼쳐 읽지 않은 경우 */
