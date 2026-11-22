@@ -420,7 +420,7 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
   <div class="fz" id="fz">
     <div class="fz-top" hidden><b class="fz-n" id="fzn" aria-live="polite">리뷰</b></div>
     <div class="fz-sort" role="group" aria-label="정렬"><button data-a="sort" data-v="best" id="s1">베스트순</button><button data-a="sort" data-v="new" id="s2">최신순</button><button data-a="sort" data-v="exp" id="sx" aria-pressed="false"><span class="gdot" aria-hidden="true"></span>경험 리뷰어순</button></div>
-    <div class="xinfo" id="xinfo" hidden><div class="xt"><b>경험을 구체적으로 쓴 리뷰어부터 보여줘요</b><button data-a="gradeinfo">기준 보기</button></div><p>자기 상황(체형, 사용 환경 등), 실제로 써본 과정, 어떤 사람에게 맞는지를 적은 리뷰어일수록 등급이 높아요.</p><div class="xb2"><span class="gr g1">1</span><span class="gr g2">2</span><span class="gr g3">3</span><span class="gr g4">4</span><span class="gr g5">5</span><small>1등급부터 순서대로</small></div></div>
+    <div class="xinfo" id="xinfo" hidden><div class="xt"><b>경험을 구체적으로 쓴 리뷰어부터 보여줘요</b><button data-a="gradeinfo">기준 보기</button></div><p>자기 상황(체형, 사용 환경 등), 실제로 써본 과정, 어떤 사람에게 맞는지를 적은 리뷰어일수록 등급이 높아요.</p><div class="xb2"><span class="gr g1">1</span><span class="gr g2">2</span><span class="gr g3">3</span><span class="gr g4">4</span><span class="gr g5">5</span><small>1등급부터 순서대로, 아주 긴 글은 뒤로</small></div></div>
     <div class="fz-row" role="group" aria-label="리뷰 필터">
       <label class="fc fsel" id="fstar"><span id="fstarl">별점 전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><select id="starsel" aria-label="별점으로 보기"><option value="0">별점 전체</option><option value="5">5점만</option><option value="4">4점만</option><option value="3">3점만</option><option value="2">2점만</option><option value="1">1점만</option></select></label>
       <label class="fc" id="fpho"><input type="checkbox" id="pho" checked>사진/동영상</label>
@@ -595,7 +595,7 @@ function renderFz(n){
 function gradeInfo(){
   sheet(`<h3>경험 리뷰어 등급 기준</h3><p>리뷰어가 쓴 리뷰 글을 분석해 1~5등급을 매겨요. 같은 리뷰어의 리뷰는 같은 등급이에요.</p>
 <p class="sm"><b>등급이 올라가는 글</b></p><ul class="gl"><li>자기 상황을 밝힌 글 (키·체형, 직업, 가족, 운동 습관 등)</li><li>언제, 어디서, 어떻게 써봤는지 적은 글</li><li>써보니 어땠는지 과정을 이야기하듯 적은 글</li><li>어떤 사람에게 추천하는지, 아쉬운 점과 이유를 적은 글</li></ul>
-<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul>
+<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul><p class="sm">경험 리뷰어순에서는 1,500자가 넘는 아주 긴 글을 맨 뒤로 보내요. 훑어보기 어렵기 때문이에요.</p>
 <div class="glg all"><span class="gr g1"><i>경험 리뷰어</i>1</span><span class="gr g2"><i>경험 리뷰어</i>2</span><span class="gr g3"><i>경험 리뷰어</i>3</span><span class="gr g4"><i>경험 리뷰어</i>4</span><span class="gr g5"><i>경험 리뷰어</i>5</span></div>
 <div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
 }
@@ -694,11 +694,13 @@ function renderGrids(){
   $('#grid').innerHTML=g.map((n,i)=>tile(n,i,i===7)).join('');
   $('#grid4').innerHTML=[g[0],g[1],g[2],g[6]].map((n,i)=>tile(n,i,i===3)).join('');
 }
+/* 경험 리뷰어순에서 과도하게 긴 글(제목 포함 1,500자 이상, 상품별 상위 약 10%)은 맨 뒤로 보낸다 */
+const LONG_N=1500;function tooLong(r){if(r._long===undefined)r._long=r_txt(r).length>=LONG_N?1:0;return r._long}
 function sorted(list){
   if(st.sort==='new')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
   /* 베스트순: 실제 쿠팡 베스트순(rk) 그대로. 같으면 도움 수
      경험 리뷰어순: 등급(1등급 먼저) 다음 실제 베스트순 */
-  return list.slice().sort((a,b)=>(st.sort==='exp'?(a.g-b.g):0)||((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0)));
+  return list.slice().sort((a,b)=>(st.sort==='exp'?((tooLong(a)-tooLong(b))||(a.g-b.g)):0)||((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0)));
 }
 function renderProductReviews(){
   const l=R.filter(r=>r.ph.length).sort((a,b)=>((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0))).slice(0,PROD_N);
