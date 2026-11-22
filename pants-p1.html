@@ -756,7 +756,7 @@ function flushVis(){const n=performance.now();for(const id in curVis){seen[id]=(
 /* ================= 공통 ================= */
 const $=s=>document.querySelector(s);
 let st,view='product',prodY=0;
-function init(){st={chip:'',cat:'',sort:'best',photo:true,star:0,page:1,open:new Set(),vote:{},down:{},sumOpen:false,bars:false,sdist:false,opt:0,size:''}}
+function init(){st={chip:'',cat:'',sort:'exp',photo:true,star:0,page:1,open:new Set(),vote:{},down:{},sumOpen:false,bars:false,sdist:false,opt:0,size:''}}
 init();
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.k);toast.k=setTimeout(()=>t.hidden=true,2200)}
 function sheet(h){const d=$('#sheet');d.innerHTML=h;if(!d.open)d.showModal()}
@@ -803,7 +803,7 @@ function sorted(list){
   return list.slice().sort((a,b)=>(st.sort==='exp'?(a.g-b.g):0)||((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0)));
 }
 function renderProductReviews(){
-  const l=sorted(R.filter(r=>r.ph.length)).slice(0,PROD_N);
+  const l=R.filter(r=>r.ph.length).sort((a,b)=>((a.rk??999)-(b.rk??999))||((b.h||0)-(a.h||0))).slice(0,PROD_N);
   $('#plist').innerHTML=l.map(r=>card(r,'p')).join('');
   observeCards('#plist');
 }
