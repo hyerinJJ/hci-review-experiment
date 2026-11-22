@@ -624,9 +624,22 @@ const RE_REC=/(추천(드려요|드립니다|해요|합니다|해드려요|하�
 const RE_REASON=/(그래서|때문에|덕분에|아쉬운|아쉽|다만|하지만|반면|대신에|걱정했|생각했는데|줄 알았|기대했|고민했|망설였)/g;
 const RE_NARR=/(더라(구요|고요|구|고)|했는데|였는데|이었는데|하니까|했더니|하더니|뺐|열었|뜯었|써보|써 ?봤|사용해 ?보|해보니|입어 ?보|먹어 ?보|느꼈|느껴졌|생각보다|막상|알았|몰랐|샀는데|샀다가|사려다|구입했|구매했|주문했|받았는데|받아보니|왔어요|왔는데|쓰고 있|쓰는 중|사용 중|한 달째|째 사용|\d+ ?(주|개월|달|년) ?(째|동안|정도 (써|사용|입|먹))|하는데|했네요|하네요|이더라|거든요|잖아요|인데요|이에요|였어요)/g;
 const RE_DETAIL=/(제 ?품 ?(특징|정보|명|스펙)|상품 ?(특징|정보|명)|스펙|정격|사양|제조국|판매원|모델명|사 ?이 ?즈 ?[:：]|무 ?게 ?[:：]|소재|KC|인증|배상|보장|난연|고밀도|최적화|풀스펙|동시 ?충전|지원합니다|지원해요|지원하여|지원하는|탑재|채택|적용되어|구성되어|특징은|장점은|보호 ?기능|안전 ?(인증|장치)|브랜드|라인업|디테일)/g;
+/* 상품과 관련된 문장만 경험으로 본다: 상품 용어나 선택칩 키워드가 들어간 문장, 또는 그 바로 앞뒤에서 자기 상황을 밝힌 문장 */
+const RE_PROD=new RegExp("(바지|팬츠|트레이닝|추리닝|조거|와이드|사이즈|정사이즈|크게|작게|커요|작아|넉넉|타이트|핏|기장|길이|밑단|허리|밴딩|끈|스트링|엉덩|허벅지|종아리|발목|키|몸무게|체중|kg|cm|체형|평소|XL|L\b|M\b|S\b|원단|소재|재질|두께|두껍|얇|기모|보풀|비침|비치|세탁|빨래|수축|줄어|색|컬러|블랙|그레이|네이비|입|착용|편하|편해|잠옷|홈웨어|외출|운동|산책|1\+1|두 ?벌|배송|가격|재구매|구매|샀|사서|주문|제품|상품|사용|쓰고|쓰니|쓰는|써요|써서|써보|썼|구입|구매|만족|좋아요|좋네|좋고|좋은|좋았|괜찮|아쉽|아쉬|별로|불편|편하|편해|편리|추천|후기|리뷰|품질|마감|기스|흠집|불량|고장|교환|환불|배송|포장|택배|도착|가격|가성비|할인|재구매|이거|요거|이건|요건|얘는|이 ?제품|개월|일 ?동안|주 ?동안|번째|콘센트|이동|기차|버스|지하철|차에서|차 안|나갈 때|다닐 때|들고|챙겨|가지고 다니|입고|입으|입어|먹고|먹으|먹어|코디|디자인|색상|컬러|퀄리티)","i");
+function splitSents(t){return t.split(/(?<=[.!?~。])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>=2)}
+function prodText(t){
+  const ss=splitSents(t),chipRe=CHIP_SPECS.filter(c=>c.re).map(c=>RX(c.re));
+  const on=ss.map(x=>RE_PROD.test(x)||chipRe.some(re=>re.test(x)));
+  const keep=ss.map((x,i)=>on[i]||(on[i-1]&&on[i+1])||(RE_SELF.test(x)&&(on[i-1]||on[i+1])));
+  /* 닉네임, 날짜, 판매자 줄, 번호, 장식, 짧은 맺음말은 셈하지 않음 */
+  const neutral=x=>x.length<8||/^\d{4}\.\d{2}\.\d{2}/.test(x)||/^판매자/.test(x)||/^[\d\s.\-=═╔╚╗╝♡⋆｡˚✦₊*~^_ㅋㅎㅠㅜ!?]+$/.test(x)||/도움(이)? ?(돼|되|됐|됬)|도움돼요|눌러|부탁드/.test(x);
+  const offs=ss.filter((x,i)=>!keep[i]&&!neutral(x));
+  const offN=offs.length, offL=offs.reduce((a,x)=>a+x.length,0);
+  return {txt:ss.filter((x,i)=>keep[i]).join(' '),offN,offL,total:ss.length};
+}
 function expScore(r){
-  const t=r_txt(r),L=t.length;let sc=0;
-  const lines=t.split(/\n/).map(x=>x.trim()).filter(Boolean);
+  const full=r_txt(r),pt=prodText(full),t=pt.txt,L=t.length;let sc=0;r._off=pt.offN;r._offL=pt.offL;r._on=pt.total-pt.offN;
+  const lines=full.split(/\n/).map(x=>x.trim()).filter(Boolean);
   const self=(t.match(RE_SELF)||[]).length, sit=(t.match(RE_SIT)||[]).length, rec=(t.match(RE_REC)||[]).length, rs=(t.match(RE_REASON)||[]).length, nar=(t.match(RE_NARR)||[]).length;
   /* 경험·배경 서술: 가산 */
   sc+= self>=4?3:self>=2?2:self>=1?1:0;
@@ -640,19 +653,22 @@ function expScore(r){
   if(lines.length>=5&&avg<45&&nar>=2)sc+=1;
   if(/(ㅋ{2,}|ㅠ{2,}|ㅜ{2,}|ㅎ{2,}|;;|\?\?|\.\.)/.test(t)&&nar>=1)sc+=1;
   /* 상세페이지·스펙 나열형: 감점 */
-  const det=(t.match(RE_DETAIL)||[]).length;
+  const det=(full.match(RE_DETAIL)||[]).length;
   sc-= det>=6?5:det>=4?4:det>=2?2:det>=1?1:0;
   const bul=lines.filter(x=>/^[•·▪▶✔✅☑\-\*]/.test(x)).length;
   if(bul>=4)sc-=3;else if(bul>=2)sc-=1;
-  if(/[✔✅☑]\s?(제품|상품|총평|장점|단점|특징|정보|스펙)/.test(t)||/^\s*\[.{3,40}\]\s*$/m.test(t))sc-=2;
-  const num=(t.match(/(^|\s)\d\.\s/g)||[]).length; if(num>=3)sc-=2;
-  const spec=(t.match(/\d[\d,\.]* ?(mAh|Wh|W|V|mm|kg|g|cm)\b/gi)||[]).length; if(spec>=6)sc-=2;else if(spec>=3&&self+nar<4)sc-=1;
+  if(/[✔✅☑]\s?(제품|상품|총평|장점|단점|특징|정보|스펙)/.test(full)||/^\s*\[.{3,40}\]\s*$/m.test(full))sc-=2;
+  const num=(full.match(/(^|\s)\d\.\s/g)||[]).length; if(num>=3)sc-=2;
+  const spec=(full.match(/\d[\d,\.]* ?(mAh|Wh|W|V|mm|kg|g|cm)\b/gi)||[]).length; if(spec>=6)sc-=2;else if(spec>=3&&self+nar<4)sc-=1;
   /* AI스러운 매끈한 홍보 문체: 감점 */
-  const ph=(t.match(/(추천드립니다|만족스럽(습니다|네요)|인상적|돋보|완벽|감탄|전반적으로|무엇보다|가장 (큰|마음에|만족)|활용도|부담 없이|합리적|알차|제격|강력 ?추천|적극 ?추천|한 번쯤|몬스터급|압도적|든든)/g)||[]).length;
+  const ph=(full.match(/(추천드립니다|만족스럽(습니다|네요)|인상적|돋보|완벽|감탄|전반적으로|무엇보다|가장 (큰|마음에|만족)|활용도|부담 없이|합리적|알차|제격|강력 ?추천|적극 ?추천|한 번쯤|몬스터급|압도적|든든)/g)||[]).length;
   sc-= ph>=5?2:ph>=3?1:0;
-  const emo=(t.match(/[\p{Extended_Pictographic}✔✅☑★●■▶◆⚡✨]/gu)||[]).length; if(emo>=3)sc-=2;else if(emo>=1)sc-=1;
+  const emo=(full.match(/[\p{Extended_Pictographic}✔✅☑★●■▶◆⚡✨]/gu)||[]).length; if(emo>=3)sc-=2;else if(emo>=1)sc-=1;
   if(L>=900&&lines.length<=8)sc-=1;
   if(L<120&&nar<2)sc-=2;
+  /* 상품과 관계없는 이야기(가정사, 일상, 다른 상품 등)가 많은 글: 감점 */
+  const offShare=pt.offL/Math.max(1,full.length);
+  if(pt.offN>=4&&offShare>=0.4)sc-=4;else if(pt.offN>=3&&offShare>=0.25)sc-=2;else if(pt.offN>=3&&offShare>=0.15)sc-=1;
   return sc;
 }
 function gradeFromMean(m){return m>=11?1:m>=8?2:m>=5?3:m>=2?4:5}
@@ -700,8 +716,8 @@ function renderFz(n){
 /* 경험 리뷰어 등급 기준 설명 */
 function gradeInfo(){
   sheet(`<h3>경험 리뷰어 등급 기준</h3><p>리뷰어가 쓴 리뷰 글을 분석해 1~5등급을 매겨요. 같은 리뷰어의 리뷰는 같은 등급이에요.</p>
-<p class="sm"><b>등급이 올라가는 글</b></p><ul class="gl"><li>자기 상황을 밝힌 글 (키·체형, 직업, 가족, 운동 습관 등)</li><li>언제, 어디서, 어떻게 써봤는지 적은 글</li><li>써보니 어땠는지 과정을 이야기하듯 적은 글</li><li>어떤 사람에게 추천하는지, 아쉬운 점과 이유를 적은 글</li></ul>
-<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul><p class="sm">경험 리뷰어순에서는 1,500자가 넘는 아주 긴 글을 맨 뒤로 보내요. 훑어보기 어렵기 때문이에요.</p>
+<p class="sm"><b>등급이 올라가는 글</b> (상품을 쓴 경험과 관련된 내용만 봐요)</p><ul class="gl"><li>자기 상황을 밝힌 글 (키·체형, 직업, 가족, 운동 습관 등)</li><li>언제, 어디서, 어떻게 써봤는지 적은 글</li><li>써보니 어땠는지 과정을 이야기하듯 적은 글</li><li>어떤 사람에게 추천하는지, 아쉬운 점과 이유를 적은 글</li></ul>
+<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상품과 관계없는 이야기(가족 이야기, 일상, 다른 일 등)가 많은 글</li><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul><p class="sm">경험 리뷰어순에서는 1,500자가 넘는 아주 긴 글을 맨 뒤로 보내요. 훑어보기 어렵기 때문이에요.</p>
 <div class="glg all"><span class="gr g1"><i>경험 리뷰어</i>1</span><span class="gr g2"><i>경험 리뷰어</i>2</span><span class="gr g3"><i>경험 리뷰어</i>3</span><span class="gr g4"><i>경험 리뷰어</i>4</span><span class="gr g5"><i>경험 리뷰어</i>5</span></div>
 <div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
 }
