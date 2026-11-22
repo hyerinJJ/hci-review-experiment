@@ -426,7 +426,7 @@ ul.gl{margin:4px 0 10px;padding-left:18px;font-size:14px;line-height:1.6;color:#
       <label class="fc" id="fpho"><input type="checkbox" id="pho" checked>사진/동영상</label>
     </div>
     <div class="fz-ai">
-      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<button class="ib" id="chipinfo" aria-label="AI 맞춤 선택칩 설명" aria-expanded="false">i</button><div class="tip" id="chiptip" role="tooltip" hidden>내 입맛과 식단 목적, 걱정되는 점에 맞는 후기만 골라 볼 수 있어요</div></div>
+      <div class="chiphd"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>AI 맞춤 선택칩<button class="ib" id="chipinfo" aria-label="AI 맞춤 선택칩 설명" aria-expanded="false">i</button><div class="tip" id="chiptip" role="tooltip" hidden>다이어트나 식단 목적, 입맛, 걱정되는 점에 맞는 후기만 골라 볼 수 있어요</div></div>
       <div class="cats" id="cats" role="group" aria-label="AI 맞춤 선택칩"></div>
       <div id="cs"></div>
     </div>
@@ -482,7 +482,7 @@ const R=(Array.isArray(window.REVIEWS_EXT)&&window.REVIEWS_EXT.length?window.REV
 /* ===== P2 데이터 주석 =====
  GRADE_OVERRIDE: {'닉네임':1~5} 로 경험 리뷰어 등급을 직접 지정할 수 있습니다.
  기본값은 자기소개·상황·추천 대상 서술이 풍부한 정도를 규칙으로 계산한 연구용 시뮬레이션입니다. */
-const CHIP_SPECS=[{"id": "f1", "label": "블랙알리오", "re": "알리오"}, {"id": "f2", "label": "오리지널", "re": "오리지널"}, {"id": "f3", "label": "랜치", "re": "랜치"}, {"id": "f4", "label": "블랙페퍼", "re": "(블랙페퍼|후추|페퍼)"}, {"id": "f5", "label": "허브·데리야끼", "re": "(허브|데리야끼|데리|훈제|스모크|바베큐|바비큐|카레)"}, {"id": "salt", "neg": true, "label": "짜요·염도", "re": "(짜(요|다|서|네|고|지|죠|ㅂ)|짠맛|염도|나트륨)", "nt": "(안|않|덜|별로|과하지|심하지)\\s?짜|짜지 않|단짠|과하지", "ms": 4}, {"id": "juicy", "label": "촉촉·부드러워요", "re": "(촉촉|부드러|야들|연해)", "nt": "(안|않|덜|별로)\\s?(촉촉|부드)"}, {"id": "dry", "neg": true, "label": "퍽퍽해요", "re": "(퍽퍽|뻑뻑|질기|딱딱|퍼석|식감이 아쉽)", "nt": "걱정|줄 알|할까|특유|않|없|덜|아니|적고|적어|극복|해결|생각보다|질리|지만 ?(맛|촉촉|부드)|편견|기억|\\?", "ms": 4}, {"id": "thaw", "neg": true, "label": "해동된 채로 도착", "re": "(해동|녹아|녹은|물렁|말랑|상온)", "nt": "해동을|해동이|해동 ?(후|해서|해 ?먹|시켜|하면)|전자레인지", "ms": 4}, {"id": "bad", "neg": true, "label": "상함·핏물·냄새", "re": "(상한|핏덩|핏물|피가|빨간|냄새|비린|잡내|부풀|부푼|변질|썩)", "ms": 3}, {"id": "bone", "label": "뼈·이물질", "re": "(뼈|이물|힘줄|비계|연골|머리카락)"}, {"id": "amt", "neg": true, "label": "양·크기가 아쉬워요", "re": "(양이 (적|작)|양은 (적|작)|크기[^.\\n]{0,10}(작|적)|작은 크기|작아요|작은 편|반쪽|g ?짜리|중량|그램|적게 느)"}, {"id": "again", "label": "재구매·꾸준히 먹어요", "re": "(재구매|또 (구매|시켜|주문)|번째 (구매|주문)|꾸준히 (구매|시켜)|항상 (구매|시켜|구입))"}, {"id": "diet", "label": "다이어트·식단 관리", "re": "(다이어트|감량|체중|칼로리)"}, {"id": "gym", "label": "근력운동·벌크업", "re": "(헬스|근육|근력|벌크|벌크업|웨이트|보디|바디)"}, {"id": "fam", "label": "가족·아이와 함께", "re": "(아이|아들|딸|가족|남편|아내|엄마|부모|고등학생|애들)"}, {"id": "cook", "label": "데우는 방법·조리", "re": "(권장|안내|분 ?(돌|동안)|초 ?(돌|동안)|속(은|이) ?(여전히 )?얼|에어프라이|프라이팬|중탕|끓는)"}, {"id": "price", "label": "가성비·가격", "re": "(가성비|개당|저렴|가격 대비|가격대비)"}];
+const CHIP_SPECS=[{"id": "diet", "label": "다이어트·식단 관리", "re": "(다이어트|감량|체중|칼로리)"}, {"id": "f1", "label": "블랙알리오", "re": "알리오"}, {"id": "f2", "label": "오리지널", "re": "오리지널"}, {"id": "f3", "label": "랜치", "re": "랜치"}, {"id": "f4", "label": "블랙페퍼", "re": "(블랙페퍼|후추|페퍼)"}, {"id": "f5", "label": "허브·데리야끼", "re": "(허브|데리야끼|데리|훈제|스모크|바베큐|바비큐|카레)"}, {"id": "salt", "neg": true, "label": "짜요·염도", "re": "(짜(요|다|서|네|고|지|죠|ㅂ)|짠맛|염도|나트륨)", "nt": "(안|않|덜|별로|과하지|심하지)\\s?짜|짜지 않|단짠|과하지", "ms": 4}, {"id": "juicy", "label": "촉촉·부드러워요", "re": "(촉촉|부드러|야들|연해)", "nt": "(안|않|덜|별로)\\s?(촉촉|부드)"}, {"id": "dry", "neg": true, "label": "퍽퍽해요", "re": "(퍽퍽|뻑뻑|질기|딱딱|퍼석|식감이 아쉽)", "nt": "걱정|줄 알|할까|특유|않|없|덜|아니|적고|적어|극복|해결|생각보다|질리|지만 ?(맛|촉촉|부드)|편견|기억|\\?", "ms": 4}, {"id": "thaw", "neg": true, "label": "해동된 채로 도착", "re": "(해동|녹아|녹은|물렁|말랑|상온)", "nt": "해동을|해동이|해동 ?(후|해서|해 ?먹|시켜|하면)|전자레인지", "ms": 4}, {"id": "bad", "neg": true, "label": "상함·핏물·냄새", "re": "(상한|핏덩|핏물|피가|빨간|냄새|비린|잡내|부풀|부푼|변질|썩)", "ms": 3}, {"id": "bone", "label": "뼈·이물질", "re": "(뼈|이물|힘줄|비계|연골|머리카락)"}, {"id": "amt", "neg": true, "label": "양·크기가 아쉬워요", "re": "(양이 (적|작)|양은 (적|작)|크기[^.\\n]{0,10}(작|적)|작은 크기|작아요|작은 편|반쪽|g ?짜리|중량|그램|적게 느)"}, {"id": "again", "label": "재구매·꾸준히 먹어요", "re": "(재구매|또 (구매|시켜|주문)|번째 (구매|주문)|꾸준히 (구매|시켜)|항상 (구매|시켜|구입))"}, {"id": "gym", "label": "근력운동·벌크업", "re": "(헬스|근육|근력|벌크|벌크업|웨이트|보디|바디)"}, {"id": "fam", "label": "가족·아이와 함께", "re": "(아이|아들|딸|가족|남편|아내|엄마|부모|고등학생|애들)"}, {"id": "cook", "label": "데우는 방법·조리", "re": "(권장|안내|분 ?(돌|동안)|초 ?(돌|동안)|속(은|이) ?(여전히 )?얼|에어프라이|프라이팬|중탕|끓는)"}, {"id": "price", "label": "가성비·가격", "re": "(가성비|개당|저렴|가격 대비|가격대비)"}];
 const GRADE_OVERRIDE={};
 /* ===== P2 코어: 선택칩 태깅 / AI 표시 / 리뷰온도 (시뮬레이션) ===== */
 const rxc={};const RX=s=>rxc[s]||(rxc[s]=new RegExp(s,'i'));
@@ -838,6 +838,6 @@ b.addEventListener('click',e=>{e.stopPropagation();const o=t.hidden;set(o);if(o&
 document.addEventListener('click',e=>{if(!t.hidden&&e.target!==b)set(false)});
 addEventListener('scroll',()=>{if(!t.hidden)set(false)},{passive:true});})();
 </script>
-<script src="card.js?v=11"></script>
+<script src="card.js?v=12"></script>
 </body>
 </html>

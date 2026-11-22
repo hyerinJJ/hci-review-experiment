@@ -19,7 +19,7 @@
   /* 상품별로 카드에 올릴 후보 칩 (구매 결정에 중요한 걱정 위주, 앞에 있을수록 우선)
      pair: 카드 위쪽에 함께 보여줄 대비 항목 (답 미리보기) */
   const PLAN={
-    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad'],basis:'내 입맛과 식단 목적, 걱정되는 점'},
+    '닭가슴살':{cand:['juicy','thaw','bad','amt','cook','diet','again'],pair:['juicy','thaw','bad'],basis:'다이어트나 식단 목적, 입맛, 걱정되는 점'},
     '보조배터리':{cand:['heavy','wt','slow','cnt','heat','bad','time','trip'],pair:['wt','heavy'],basis:'내 폰 기종과 쓰는 상황'},
     '트레이닝복':{cand:['sz2','sz1','sz0','len','see','wash','wst','fur'],pair:['sz0','sz1','sz2'],basis:'내 키와 체형'}
   };
@@ -31,7 +31,7 @@
 
   const css=document.createElement('style');
   css.textContent=`
-  .ccard{margin:14px 16px;padding:14px 0 14px;border:1px solid #e3e6ea;border-radius:12px;background:#fafbfc;overflow:hidden}
+  .ccard{margin:14px 16px;padding:14px 0 14px;border:1.5px solid #4168f6;border-radius:12px;background:#fafbfc;overflow:hidden}
   .ccard .cc-h{display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px}
   .ccard .cc-h b{flex:1;font-size:13.5px;font-weight:700}
   .ccard .cc-h small{display:block;margin-top:4px;font-weight:400;font-size:12.5px;line-height:1.5;color:#7a7f88}
