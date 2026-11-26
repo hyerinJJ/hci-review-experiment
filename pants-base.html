@@ -562,8 +562,8 @@ function renderSummary(){
 }
 function sorted(list){
   if(st.sort!=='best')return list.slice().sort((a,b)=>(a.d<b.d?1:a.d>b.d?-1:0));
-  /* 베스트순: 도움이 돼요 수가 많은 순. 같으면 크롤링 순서(rk), 그다음 최신순 */
-  return list.slice().sort((a,b)=>((b.h||0)-(a.h||0))||((a.rk??999)-(b.rk??999))||(a.d<b.d?1:a.d>b.d?-1:0));
+  /* 베스트순: 별점 5점 리뷰 전부, 4점 전부, ... 1점 순. 같은 별점 안에서는 데이터에 올린 순서 그대로 */
+  return list.slice().sort((a,b)=>((b.s||0)-(a.s||0)));
 }
 function renderProductReviews(){
   const l=sorted(R.filter(r=>r.ph.length)).slice(0,PROD_N);
