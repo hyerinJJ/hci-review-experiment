@@ -636,7 +636,7 @@ function prodText(t){
   const keep=ss.map((x,i)=>on[i]||(on[i-1]&&on[i+1])||(RE_SELF.test(x)&&(on[i-1]||on[i+1])));
   /* 닉네임, 날짜, 판매자 줄, 번호, 장식, 짧은 맺음말은 셈하지 않음 */
   const neutral=x=>x.length<8||/^\d{4}\.\d{2}\.\d{2}/.test(x)||/^판매자/.test(x)||/^[\d\s.\-=═╔╚╗╝♡⋆｡˚✦₊*~^_ㅋㅎㅠㅜ!?]+$/.test(x)||/도움(이)? ?(돼|되|됐|됬)|도움돼요|눌러|부탁드/.test(x);
-  const offs=ss.filter((x,i)=>!keep[i]&&!neutral(x));
+  const offs=ss.filter((x,i)=>!keep[i]&&!neutral(x)&&!RE_SELFTALK.test(x)); /* 자기 얘기 문장은 아래 talk에서 따로 셈 (중복 감점 방지) */
   const offN=offs.length, offL=offs.reduce((a,x)=>a+x.length,0);
   return {txt:ss.filter((x,i)=>keep[i]).join(' '),offN,offL,total:ss.length,talkN:talk.length,talkL:talk.reduce((a,x)=>a+x.length,0)};
 }
@@ -654,7 +654,7 @@ function expScore(r){
   /* 길이: 훑어보기 어려운 긴 글은 감점 (제목 포함 전체 글자 수) */
   const FL=full.length; sc-= FL>=1300?5:FL>=1000?3:FL>=800?2:FL>=600?1:0;
   /* 체험단(무료 제공) 리뷰: 감점 */
-  if(r.ex||/체험단|무료(로)? ?제공|제공받/.test(full))sc-=2;
+  if(r.ex||/체험단|무료(로)? ?제공|제공받/.test(full))sc-=1;
   /* 다른 구매자가 누른 '도움이 돼요' 수: 가산 */
   const H=r.h||0; sc+= H>=30?3:H>=10?2:H>=3?1:0;
   /* 담백하게 줄 단위로 써내려간 글 */
@@ -679,7 +679,7 @@ function expScore(r){
   const offShare=pt.offL/Math.max(1,full.length);
   /* 자기 얘기와 감정 표현이 많은 글: 감점 */
   const talkShare=pt.talkL/Math.max(1,full.length);
-  sc-= pt.talkN>=6||talkShare>=0.35?4:pt.talkN>=4||talkShare>=0.25?2:pt.talkN>=3?1:0;
+  sc-= pt.talkN>=8||talkShare>=0.45?3:pt.talkN>=5||talkShare>=0.3?2:pt.talkN>=3?1:0;
   if(pt.offN>=4&&offShare>=0.4)sc-=4;else if(pt.offN>=3&&offShare>=0.25)sc-=2;else if(pt.offN>=3&&offShare>=0.15)sc-=1;
   return sc;
 }
