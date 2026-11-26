@@ -6,7 +6,7 @@ window.LAB_CONFIG = {
   /* 리뷰 작성 activity (말로 쓰는 리뷰) 주소 */
   WRITE_URL: "https://ai-review-chat.vercel.app/",
   /* 참여자별 리뷰 작성 activity 품목 (사전에 받은 품목, P2의 ?item= 값). 없으면 닭가슴살 */
-  WRITE_ITEM: { A: "light" },
+  WRITE_ITEM: { A: "light", B: "pouch" },
   /* 조건 배치표: 참가자별 구매 판단 과제 1, 2 */
   PLAN: {
     A: [["chicken", "base"], ["battery", "p1"]],
