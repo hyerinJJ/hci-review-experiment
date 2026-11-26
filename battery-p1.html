@@ -544,6 +544,8 @@ function expScore(r){
   if(self+rec+nar>=3&&L>=150)sc+=1;
   /* 길이: 훑어보기 어려운 긴 글은 감점 (제목 포함 전체 글자 수) */
   const FL=full.length; sc-= FL>=1300?5:FL>=1000?3:FL>=800?2:FL>=600?1:0;
+  /* 체험단(무료 제공) 리뷰: 감점 */
+  if(r.ex||/체험단|무료(로)? ?제공|제공받/.test(full))sc-=1;
   /* 다른 구매자가 누른 '도움이 돼요' 수: 가산 */
   const H=r.h||0; sc+= H>=30?3:H>=10?2:H>=3?1:0;
   /* 담백하게 줄 단위로 써내려간 글 */
@@ -577,7 +579,9 @@ function gradeOf(r){
   const n=r.n;if(n in GRADE_OVERRIDE)return GRADE_OVERRIDE[n];
   if(!(n in _gc)){const mine=R.filter(x=>x.n===n);let g=gradeFromMean(mine.reduce((a,x)=>a+x.sc,0)/mine.length);
     /* 1,000자 넘는 긴 글을 쓴 리뷰어는 1등급(금색)이 되지 않음 */
-    if(g===1&&mine.some(x=>r_txt(x).length>=LONG_N))g=2;_gc[n]=g}
+    if(g===1&&mine.some(x=>r_txt(x).length>=LONG_N))g=2;
+    /* 체험단(무료 제공) 리뷰를 쓴 리뷰어는 3등급보다 높아지지 않음 */
+    if(g<3&&mine.some(x=>x.ex||/체험단|무료(로)? ?제공|제공받/.test(r_txt(x))))g=3;_gc[n]=g}
   return _gc[n];
 }
 
@@ -618,7 +622,7 @@ function renderFz(n){
 function gradeInfo(){
   sheet(`<h3>경험 리뷰어 등급 기준</h3><p>리뷰어가 쓴 리뷰 글을 분석해 1~5등급을 매겨요. 같은 리뷰어의 리뷰는 같은 등급이에요.</p>
 <p class="sm"><b>등급이 올라가는 글</b> (상품을 쓴 경험과 관련된 내용만 봐요)</p><ul class="gl"><li>자기 상황을 밝힌 글 (키·체형, 직업, 가족, 운동 습관 등)</li><li>언제, 어디서, 어떻게 써봤는지 적은 글</li><li>써보니 어땠는지 과정을 이야기하듯 적은 글</li><li>어떤 사람에게 추천하는지, 아쉬운 점과 이유를 적은 글</li></ul>
-<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상품과 관계없는 이야기(가족 이야기, 일상, 다른 일 등)가 많은 글</li><li>훑어보기 어려울 만큼 긴 글</li><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul><p class="sm">경험 리뷰어순에서는 1,000자가 넘는 긴 글을 맨 뒤로 보내고, 같은 등급 안에서는 '도움이 돼요'가 많은 글부터 보여줘요.</p>
+<p class="sm"><b>등급이 내려가는 글</b></p><ul class="gl"><li>상품과 관계없는 이야기(가족 이야기, 일상, 다른 일 등)가 많은 글</li><li>훑어보기 어려울 만큼 긴 글</li><li>체험단으로 무료 제공받아 쓴 글 (3등급까지만)</li><li>상세페이지처럼 상품 정보·스펙을 나열한 글</li><li>글머리표·번호 목록으로 정리한 글</li><li>홍보 문구나 이모지가 많은 글</li></ul><p class="sm">경험 리뷰어순에서는 1,000자가 넘는 긴 글을 맨 뒤로 보내고, 같은 등급 안에서는 '도움이 돼요'가 많은 글부터 보여줘요.</p>
 <div class="glg all"><span class="gr g1"><i>경험 리뷰어</i>1</span><span class="gr g2"><i>경험 리뷰어</i>2</span><span class="gr g3"><i>경험 리뷰어</i>3</span><span class="gr g4"><i>경험 리뷰어</i>4</span><span class="gr g5"><i>경험 리뷰어</i>5</span></div>
 <div class="so"><button class="pri" data-a="sclose">확인</button></div>`);
 }
