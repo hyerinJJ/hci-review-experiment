@@ -18,7 +18,7 @@
     CONDS: { base: '비교군', p1: 'P1' },
     plan: C.PLAN || {},
     writeUrl: C.WRITE_URL || '',
-    writeOrder: C.WRITE_ORDER || {},
+    writeItem: C.WRITE_ITEM || {},
     gasUrl: function () { return LS.get('lab_gas_url') || C.GAS_URL || ''; },
     LS: LS,
     pid: Q.get('pid') || '',

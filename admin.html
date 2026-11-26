@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>실험 관리자</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="config.js?v=12"></script>
-<script src="lab.js?v=12"></script>
+<script src="config.js?v=13"></script>
+<script src="lab.js?v=13"></script>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--tx:#111827;--tx2:#5b6472;--tx3:#8b93a1;--ln:#e3e7ed;--pri:#4168f6;--pri-bg:#edf1ff;--ok:#1f8a4c;--ok-bg:#e7f6ec;--wa:#a15c00;--wa-bg:#fff3e0;--ai:#5a2bbf;--ai-bg:#f2edff;color-scheme:light}
 *{box-sizing:border-box}
@@ -211,7 +211,7 @@ function renderLinks(){
   const items=[['실험 시작 화면',root+'index.html']];
   if(g)items.push(['기기 설정 링크 (실험 폰에서 한 번 열기)',root+'index.html?gs='+encodeURIComponent(g)]);
   Object.keys(P).forEach(p=>Object.keys(CN).forEach(c=>items.push([`${P[p].name} ${CN[c]} 미리보기`,`${root}${p}-${c}.html?pid=TEST`])));
-  if(LAB.writeUrl){const gs=g&&g!==(window.LAB_CONFIG||{}).GAS_URL?'&gs='+encodeURIComponent(g):'';items.push(['리뷰 작성 activity 미리보기 (TEST)',LAB.writeUrl+'?pid=TEST'+gs]);Object.keys(LAB.plan).forEach(pid=>items.push([`리뷰 작성 activity 참여자 ${pid}`,LAB.writeUrl+'?pid='+pid+gs]));}
+  if(LAB.writeUrl){const gs=g&&g!==(window.LAB_CONFIG||{}).GAS_URL?'&gs='+encodeURIComponent(g):'';items.push(['리뷰 작성 activity 미리보기 (TEST)',LAB.writeUrl+'?pid=TEST'+gs]);Object.keys(LAB.plan).forEach(pid=>items.push([`리뷰 작성 activity 참여자 ${pid}${LAB.writeItem[pid]?' ('+LAB.writeItem[pid]+')':''}`,LAB.writeUrl+'?pid='+pid+(LAB.writeItem[pid]?'&item='+LAB.writeItem[pid]:'')+gs]));}
   $('#links').innerHTML=items.map(([l,u])=>`<div class="lk"><span title="${u}">${l}</span><a class="b sm" href="${u}" target="_blank" rel="noopener">열기</a><button class="b sm" data-copy="${u}">복사</button></div>`).join('');
 }
 document.addEventListener('click',e=>{

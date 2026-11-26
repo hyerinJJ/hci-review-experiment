@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>리뷰 화면 사용성 실험</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="config.js?v=12"></script>
-<script src="lab.js?v=12"></script>
+<script src="config.js?v=13"></script>
+<script src="lab.js?v=13"></script>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--tx:#111827;--tx2:#5b6472;--tx3:#8b93a1;--ln:#e3e7ed;--pri:#4168f6;--pri-bg:#edf1ff;--ok:#1f8a4c;--ok-bg:#e7f6ec;color-scheme:light}
 *{box-sizing:border-box}
@@ -110,7 +110,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.pid){st.pid=t.dataset.pid;render()}
   else if(t.dataset.prod){st.prod=t.dataset.prod;render()}
   else if(t.dataset.cond){st.cond=t.dataset.cond;render()}
-  else if(t.dataset.write){if(!st.pid)return;LAB.LS.set('lab_last_pid',st.pid);const u=new URL(LAB.writeUrl);u.searchParams.set('pid',st.pid);if(LAB.gasUrl()&&LAB.gasUrl()!==(window.LAB_CONFIG||{}).GAS_URL)u.searchParams.set('gs',LAB.gasUrl());location.href=u.toString()}
+  else if(t.dataset.write){if(!st.pid)return;LAB.LS.set('lab_last_pid',st.pid);const u=new URL(LAB.writeUrl);u.searchParams.set('pid',st.pid);if(LAB.writeItem[st.pid])u.searchParams.set('item',LAB.writeItem[st.pid]);if(LAB.gasUrl()&&LAB.gasUrl()!==(window.LAB_CONFIG||{}).GAS_URL)u.searchParams.set('gs',LAB.gasUrl());location.href=u.toString()}
   else if(t.dataset.go){const [p,c,i]=t.dataset.go.split(',');go(p,c,i)}
   else if(t.id==='start')go(st.prod,st.cond,'');
 });
